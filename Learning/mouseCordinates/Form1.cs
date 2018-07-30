@@ -19,7 +19,6 @@ namespace mouseCordinates
         {
 
             InitializeComponent();
-            
            
         }
 
@@ -35,6 +34,23 @@ namespace mouseCordinates
         {
             var dataObject = e.Data;
             
+        }
+
+        private void textBox1_DragDrop(object sender, DragEventArgs e)
+        {
+             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+             string file = files[0];
+            textBox1.Text = System.IO.File.ReadAllText(file);
+        }
+
+        private void textBox1_DragOver(object sender, DragEventArgs e)
+        {
+            
+        }
+
+        private void textBox1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
         }
     }
 }
