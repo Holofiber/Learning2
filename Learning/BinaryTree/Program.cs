@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,11 @@ namespace BinaryTree
             tree.Add(5);
             tree.Add(20);
             tree.Add(8);
+
+            foreach (var i in tree)
+            {
+
+            }
 
         }
     }
@@ -46,10 +52,14 @@ namespace BinaryTree
         }
     }
 
-    public class Tree
+    public class Tree : IEnumerable
     {
-        private Node RootNode;
+        public Node RootNode;
 
+        public void Clear()
+        {
+            RootNode = null;
+        }
         public void Add(int number, Node node = null)
         {
 
@@ -104,11 +114,16 @@ namespace BinaryTree
                 }
             }
 
+        }
 
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
-
-
-
-
 }
