@@ -7,7 +7,7 @@ namespace BinaryTreeTest
     [TestClass]
     public class UnitTest1
     {
-        Tree tree = new Tree();
+      /*  Tree tree = new Tree();
         Node node = new Node();
 
         [TestMethod]
@@ -15,7 +15,7 @@ namespace BinaryTreeTest
         {
             tree.Add(10);
 
-            Assert.AreEqual(tree.RootNode.NodeNumber, 10);
+            Assert.AreEqual(tree, 10);
         }
 
         [TestMethod]
@@ -76,6 +76,6 @@ namespace BinaryTreeTest
             tree.Clear();
 
             Assert.IsNull(tree.RootNode);
-        }
+        }*/
     }
 }

@@ -8,11 +8,12 @@ namespace Enumeraots
     {
         private readonly List<Car> firstRow = new List<Car>(5);
         private readonly List<Car> secondRow = new List<Car>(5);
-
+        private int state = 0;
         public Parking()
         {
             for (int i = 0; i < 5; i++)
             {
+               
                 firstRow.Add(null);
                 secondRow.Add(null);
             }
@@ -37,7 +38,30 @@ namespace Enumeraots
             Debug.WriteLine("before");
             int i = 0;
             int y = 0;
-            foreach (var car in firstRow)
+            
+            switch (state)
+            {
+                case 0:
+                    state = 1;
+
+                    yield return firstRow[0];
+                    break;
+                case 1:
+                    state = 2;
+                    yield return firstRow[1];
+                    break;
+                case 2:
+                    state = 3;
+                    yield return firstRow[2];
+                    break;
+                case 3:
+                    state = 4;
+                    yield return firstRow[3];
+                    break;
+            }
+
+
+           /* foreach (var car in firstRow)
             {
                 Debug.WriteLine($"count {i++}");
                 if (car != null)
@@ -49,7 +73,7 @@ namespace Enumeraots
                 {
                     Debug.WriteLine("car is null");
                 }
-            }
+            }*/
 
             Debug.WriteLine("end first foreach");
 

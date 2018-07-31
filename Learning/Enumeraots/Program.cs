@@ -12,10 +12,10 @@ namespace Enumeraots
         {
             var parking = new Parking();
 
-            parking.Add(new Car("BMW"), 2, 0);
-            parking.Add(new Car("Lada"), 1, 1);
-            parking.Add(new Car("Audi"), 3, 0);
-            parking.Add(new Car("Mers"), 4, 1);
+            parking.Add(new Car("BMW"), 0, 0);
+            parking.Add(new Car("Lada"), 1, 0);
+            parking.Add(new Car("Audi"), 2, 0);
+            parking.Add(new Car("Mers"), 3, 0);
 
 
 
