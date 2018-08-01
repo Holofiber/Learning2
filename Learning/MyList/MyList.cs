@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace MyListDemo
@@ -126,7 +127,26 @@ namespace MyListDemo
 
         public int IndexOf(T item)
         {
-            throw new System.NotImplementedException();
+            var tempNode = head;
+            int i = 0;
+            while (true)
+            {
+                if (item.Equals(tempNode.Item))
+                {
+                    return i;
+                }
+                else
+                {
+                    i++;
+                    if (tempNode.NextNode == null)
+                    {
+                        return -1;
+                        break;
+                    }
+                    tempNode = tempNode.NextNode;
+                }
+
+            }
         }
 
         public void Insert(int index, T item)

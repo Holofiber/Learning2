@@ -208,6 +208,7 @@ namespace MyListTest
             list.IndexOf("C").Should().Be(2);
             list.IndexOf("W").Should().Be(3);
             list.IndexOf("Z").Should().Be(4);
+            list.IndexOf("F").Should().Be(-1);
         }
     }
 }

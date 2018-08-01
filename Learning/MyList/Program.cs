@@ -14,7 +14,8 @@ namespace MyListDemo
             var t = list.IndexOf(3);
 
             List<string> stringList = new List<string>() { "a", "sad0", "sa" };
-            var z = stringList.IndexOf("a");
+            var z = stringList.IndexOf("aqqq");
+            var ttt = stringList[2];
 
             new Run().AddToList();
         }
