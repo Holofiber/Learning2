@@ -137,7 +137,37 @@ namespace MyListDemo
 
         public bool Remove(T item)
         {
-            return false;
+            if (head == null)
+            {
+                return false;
+            }
+            var tempNode = head;
+
+            while (true)
+            {
+
+                if (item.Equals(tempNode.Item))
+                {
+                    tempNode.PrevNode.NextNode = tempNode.NextNode;
+                    tempNode.NextNode.PrevNode = tempNode.PrevNode;
+                    count--;
+                    head = tempNode;
+
+                    return true;
+
+                }
+
+
+
+                if (tempNode.NextNode == null)
+                {
+                    return false;
+                    break;
+                }
+                tempNode = tempNode.NextNode;
+
+
+            }
         }
 
         public int Count

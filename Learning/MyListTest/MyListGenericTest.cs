@@ -210,5 +210,31 @@ namespace MyListTest
             list.IndexOf("Z").Should().Be(4);
             list.IndexOf("F").Should().Be(-1);
         }
+
+        [TestMethod]
+        public void Remove_Test()
+        {
+            MyList<string> list = new MyList<string>() { "a", "b", "c", "d" };
+
+            list.Count.Should().Be(4);
+            list.Remove("b").Should().BeTrue();
+            list.Count.Should().Be(3);
+            list.head.NextNode.Item.Should().Be("c");
+            list.head.NextNode.PrevNode.Item.Should().Be("a");
+
+
+
+        }
+
+        [TestMethod]
+        public void Empty_List_Test()
+        {
+            MyList<string> list = new MyList<string>();
+
+            list.IndexOf("q").Should().Be(-1);
+            list.Contains("a").Should().BeFalse();
+            list.Remove("qq").Should().BeFalse();
+
+        }
     }
 }
