@@ -42,8 +42,8 @@ namespace MyListTest
             list.Add("A");
 
             list.head.Item.Should().Be("A");
-            list.head.FollowingItem.Should().BeNull();
-            list.head.InitialItem.Should().BeNull();
+            list.head.NextNode.Should().BeNull();
+            list.head.PrevNode.Should().BeNull();
         }
 
         [TestMethod]
@@ -60,15 +60,15 @@ namespace MyListTest
 
 
             list.head.Item.Should().Be("A");
-            list.head.FollowingItem.Item.Should().Be("B");
-            list.head.FollowingItem.FollowingItem.Item.Should().Be("C");
-            list.head.FollowingItem.FollowingItem.FollowingItem.Item.Should().Be("W");
-            list.head.FollowingItem.FollowingItem.FollowingItem.FollowingItem.Item.Should().Be("Z");
+            list.head.NextNode.Item.Should().Be("B");
+            list.head.NextNode.NextNode.Item.Should().Be("C");
+            list.head.NextNode.NextNode.NextNode.Item.Should().Be("W");
+            list.head.NextNode.NextNode.NextNode.NextNode.Item.Should().Be("Z");
 
-            list.head.FollowingItem.InitialItem.Item.Should().Be("A");
-            list.head.FollowingItem.FollowingItem.InitialItem.Item.Should().Be("B");
-            list.head.FollowingItem.FollowingItem.FollowingItem.InitialItem.Item.Should().Be("C");
-            list.head.FollowingItem.FollowingItem.FollowingItem.FollowingItem.InitialItem.Item.Should().Be("W");
+            list.head.NextNode.PrevNode.Item.Should().Be("A");
+            list.head.NextNode.NextNode.PrevNode.Item.Should().Be("B");
+            list.head.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be("C");
+            list.head.NextNode.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be("W");
         }
 
         [TestMethod]
@@ -80,8 +80,8 @@ namespace MyListTest
             // 45 ззнаків після коми, не точно показує
 
             list.head.Item.Should().Be(0.000000000000000000000000000000000000000000002f);
-            list.head.FollowingItem.Should().BeNull();
-            list.head.InitialItem.Should().BeNull();
+            list.head.NextNode.Should().BeNull();
+            list.head.PrevNode.Should().BeNull();
         }
 
         [TestMethod]
@@ -98,15 +98,15 @@ namespace MyListTest
 
 
             list.head.Item.Should().Be(0.0000000001f);
-            list.head.FollowingItem.Item.Should().Be(0.0000000002f);
-            list.head.FollowingItem.FollowingItem.Item.Should().Be(0.0000000003f);
-            list.head.FollowingItem.FollowingItem.FollowingItem.Item.Should().Be(0.0000000004f);
-            list.head.FollowingItem.FollowingItem.FollowingItem.FollowingItem.Item.Should().Be(0.0000000005f);
+            list.head.NextNode.Item.Should().Be(0.0000000002f);
+            list.head.NextNode.NextNode.Item.Should().Be(0.0000000003f);
+            list.head.NextNode.NextNode.NextNode.Item.Should().Be(0.0000000004f);
+            list.head.NextNode.NextNode.NextNode.NextNode.Item.Should().Be(0.0000000005f);
 
-            list.head.FollowingItem.InitialItem.Item.Should().Be(0.0000000001f);
-            list.head.FollowingItem.FollowingItem.InitialItem.Item.Should().Be(0.0000000002f);
-            list.head.FollowingItem.FollowingItem.FollowingItem.InitialItem.Item.Should().Be(0.0000000003f);
-            list.head.FollowingItem.FollowingItem.FollowingItem.FollowingItem.InitialItem.Item.Should().Be(0.0000000004f);
+            list.head.NextNode.PrevNode.Item.Should().Be(0.0000000001f);
+            list.head.NextNode.NextNode.PrevNode.Item.Should().Be(0.0000000002f);
+            list.head.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be(0.0000000003f);
+            list.head.NextNode.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be(0.0000000004f);
         }
 
         [TestMethod]
@@ -118,8 +118,96 @@ namespace MyListTest
             //100500 over знаків і тест фейлить, якщо змінити останній знак
 
             list.head.Item.Should().Be(0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001);
-            list.head.FollowingItem.Should().BeNull();
-            list.head.InitialItem.Should().BeNull();
+            list.head.NextNode.Should().BeNull();
+            list.head.PrevNode.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Count_Test()
+        {
+            MyList<string> list = new MyList<string>();
+
+
+            list.Add("1");
+            list.Add("2");
+            list.Add("3");
+            list.Add("4");
+            list.Add("5");
+
+            list.Count.Should().Be(5);
+
+            int z = 0;
+
+            for (int i = 1; i <= list.Count; i++)
+            {
+                z = i;
+            }
+
+            z.Should().Be(5);
+        }
+
+        [TestMethod]
+        public void Clear_Test()
+        {
+            MyList<string> list = new MyList<string>();
+
+
+            list.Add("A");
+            list.Add("B");
+            list.Add("C");
+            list.Add("W");
+            list.Add("Z");
+
+            list.Count.Should().Be(5);
+
+
+            list.head.Item.Should().Be("A");
+            list.head.NextNode.Item.Should().Be("B");
+            list.head.NextNode.NextNode.Item.Should().Be("C");
+            list.head.NextNode.NextNode.NextNode.Item.Should().Be("W");
+            list.head.NextNode.NextNode.NextNode.NextNode.Item.Should().Be("Z");
+
+            list.Clear();
+
+            list.head.Should().BeNull();
+            list.Count.Should().Be(0);
+        }
+
+        [TestMethod]
+        public void Contains_Test()
+        {
+            MyList<string> list = new MyList<string>();
+
+
+            list.Add("A");
+            list.Add("B");
+            list.Add("C");
+            list.Add("W");
+            list.Add("Z");
+
+            list.Contains("A").Should().BeTrue();
+            list.Contains("a").Should().BeFalse();
+            list.Contains("R").Should().BeFalse();
+            list.Contains("W").Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void IndexOf_Test()
+        {
+            MyList<string> list = new MyList<string>();
+
+
+            list.Add("A");
+            list.Add("B");
+            list.Add("C");
+            list.Add("W");
+            list.Add("Z");
+
+            list.IndexOf("A").Should().Be(0);
+            list.IndexOf("B").Should().Be(1);
+            list.IndexOf("C").Should().Be(2);
+            list.IndexOf("W").Should().Be(3);
+            list.IndexOf("Z").Should().Be(4);
         }
     }
 }

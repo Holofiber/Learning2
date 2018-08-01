@@ -16,8 +16,8 @@ namespace MyListTest
             list.Add(10);
 
             list.head.Item.Should().Be(10);
-            list.head.FollowingItem.Should().BeNull();
-            list.head.InitialItem.Should().BeNull();
+            list.head.NextNode.Should().BeNull();
+            list.head.PrevNode.Should().BeNull();
         }
 
         [TestMethod]
@@ -29,8 +29,8 @@ namespace MyListTest
             list.Add(11);
 
             list.head.Item.Should().Be(10);
-            list.head.FollowingItem.Item.Should().Be(11);
-            list.head.FollowingItem.InitialItem.Should().Be(list.head);
+            list.head.NextNode.Item.Should().Be(11);
+            list.head.NextNode.PrevNode.Should().Be(list.head);
         }
 
         [TestMethod]
@@ -47,15 +47,17 @@ namespace MyListTest
 
 
             list.head.Item.Should().Be(10);
-            list.head.FollowingItem.Item.Should().Be(11);
-            list.head.FollowingItem.FollowingItem.Item.Should().Be(12);
-            list.head.FollowingItem.FollowingItem.FollowingItem.Item.Should().Be(13);
-            list.head.FollowingItem.FollowingItem.FollowingItem.FollowingItem.Item.Should().Be(14);
+            list.head.NextNode.Item.Should().Be(11);
+            list.head.NextNode.NextNode.Item.Should().Be(12);
+            list.head.NextNode.NextNode.NextNode.Item.Should().Be(13);
+            list.head.NextNode.NextNode.NextNode.NextNode.Item.Should().Be(14);
 
-            list.head.FollowingItem.InitialItem.Item.Should().Be(10);
-            list.head.FollowingItem.FollowingItem.InitialItem.Item.Should().Be(11);
-            list.head.FollowingItem.FollowingItem.FollowingItem.InitialItem.Item.Should().Be(12);
-            list.head.FollowingItem.FollowingItem.FollowingItem.FollowingItem.InitialItem.Item.Should().Be(13);
+            list.head.NextNode.PrevNode.Item.Should().Be(10);
+            list.head.NextNode.NextNode.PrevNode.Item.Should().Be(11);
+            list.head.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be(12);
+            list.head.NextNode.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be(13);
         }
+
+
     }
 }

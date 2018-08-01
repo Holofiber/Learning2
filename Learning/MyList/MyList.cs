@@ -27,10 +27,10 @@ namespace MyListDemo
             }
             else
             {
-                tail.FollowingItem = node;
+                tail.NextNode = node;
 
 
-                node.InitialItem = tail;
+                node.PrevNode = tail;
 
             }
 
@@ -42,6 +42,7 @@ namespace MyListDemo
         {
             this.items = items;
         }
+
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             foreach (var item in items)
@@ -63,7 +64,7 @@ namespace MyListDemo
 
                 yield return currentNode.Item;
 
-                currentNode = currentNode.FollowingItem;
+                currentNode = currentNode.NextNode;
             }
 
         }
@@ -81,7 +82,7 @@ namespace MyListDemo
 
                 yield return currentNode.Item;
 
-                currentNode = currentNode.InitialItem;
+                currentNode = currentNode.PrevNode;
             }
 
         }
@@ -96,7 +97,8 @@ namespace MyListDemo
 
         public void Clear()
         {
-
+            head = null;
+            count = 0;
         }
 
         public bool Contains(T item)
@@ -121,6 +123,7 @@ namespace MyListDemo
         }
 
         public bool IsReadOnly { get; }
+
         public int IndexOf(T item)
         {
             throw new System.NotImplementedException();

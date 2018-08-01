@@ -15,16 +15,16 @@ namespace MyListDemo
 
         }
 
-        public Node<T> InitialItem;
+        public Node<T> PrevNode;
 
-        public Node<T> FollowingItem;
+        public Node<T> NextNode;
 
 
 
-        public Node(T item, Node<T> initialItem)
+        public Node(T item, Node<T> prevNode)
         {
             Item = item;
-            InitialItem = initialItem;
+            PrevNode = prevNode;
         }
 
         public T Item;
