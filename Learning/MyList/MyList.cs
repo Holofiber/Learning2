@@ -104,7 +104,30 @@ namespace MyListDemo
 
         public bool Contains(T item)
         {
-            return false;
+            if (head == null)
+            {
+                return false;
+            }
+            var tempNode = head;
+
+            while (true)
+            {
+
+                if (item.Equals(tempNode.Item))
+                {
+                    return true;
+                }
+
+
+                if (tempNode.NextNode == null)
+                {
+                    return false;
+                    break;
+                }
+                tempNode = tempNode.NextNode;
+
+
+            }
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -127,6 +150,11 @@ namespace MyListDemo
 
         public int IndexOf(T item)
         {
+            if (head == null)
+            {
+                return -1;
+            }
+
             var tempNode = head;
             int i = 0;
             while (true)
