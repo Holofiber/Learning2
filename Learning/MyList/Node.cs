@@ -3,29 +3,29 @@ using System.Collections.Generic;
 
 namespace MyListDemo
 {
-    public class Node
+    public class Node<T>
     {
-        public Node(int number)
+        public Node(T number)
         {
             Number = number;
         }
 
         public Node()
         {
-            
+
         }
 
-        public Node InitialItem;
+        public Node<T> InitialItem;
 
-        public Node FollowingItem;
+        public Node<T> FollowingItem;
 
-        public Node(int number, Node initialItem)
+        public Node(T number, Node<T> initialItem)
         {
             Number = number;
             InitialItem = initialItem;
         }
 
-        public int Number;
+        public T Number;
 
         public override string ToString()
         {

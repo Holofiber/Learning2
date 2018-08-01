@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyListDemo
 {
-    public class MyList : IEnumerable<int>
+    public class MyList<T> : ICollection<T>
     {
-        public Node head;
-        private Node tail;
-        private int Count;
+        public Node<T> head;
+        private Node<T> tail;
+        private int count;
+        private T[] items;
 
         public MyList()
         {
-
+            
         }
 
-        public void Add(int value)
+        public void Add(T value)
         {
-            Node node = new Node(value);
+            Node<T> node = new Node<T>(value);
 
             if (head == null)
             {
@@ -36,83 +33,92 @@ namespace MyListDemo
             }
 
             tail = node;
-            Count++;
+            count++;
         }
 
-
-        public IEnumerator<int> GetEnumerator()
+        public MyList(T[] items)
         {
-
-            return new CustomIterator(this);
+            this.items = items;
         }
-
-        public IEnumerator<int> GetEnumeratorSecond()
+         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-
-            return new CustomIterator(this);
+            foreach (var item in items)
+            {
+                yield return item;
+            }
         }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            var currentNode = head;
+
+            while (true)
+            {
+                if (currentNode == null)
+                {
+                    yield break;
+                }
+
+                yield return currentNode.Number;
+
+                currentNode = currentNode.FollowingItem;
+            }
+
+        }
+
+        public IEnumerator<T> GetEnumeratorReverse()
+        {
+            var currentNode = tail;
+
+            while (true)
+            {
+                if (currentNode == null)
+                {
+                    yield break;
+                }
+
+                yield return currentNode.Number;
+
+                currentNode = currentNode.InitialItem;
+            }
+
+        }
+
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
 
-        public class CustomIterator : IEnumerator<int>, IEnumerator, IDisposable
+        
+
+        public void Clear()
         {
-            internal CustomIterator(MyList container)
-            {
-                this.container = container;
-                currentNode = null;
-
-            }
-
-            public void Reset()
-            {
-
-            }
-
-            object IEnumerator.Current => Current;
-
-
-            public int Current
-            {
-                get
-                {
-                    if (currentNode == null)
-                    {
-                        throw new InvalidOperationException();
-                    }
-                    return currentNode.Number;
-                }
-
-            }
-
-
-
-            public bool MoveNext()
-            {
-                if (currentNode == null)
-                {
-                    currentNode = container.head;
-                }
-                if (currentNode.FollowingItem != null)
-                {
-                    currentNode = currentNode.FollowingItem;
-                    return true;
-                }
-                return false;
-            }
-
-
-            private Node currentNode;
-            private MyList container;
-
-            public void Dispose()
-            {
-
-            }
+            
         }
 
+        public bool Contains(T item)
+        {
+            return false;
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            
+        }
+
+        public bool Remove(T item)
+        {
+            return false;
+        }
+
+        public int Count
+        {
+            get => Count = count;
+            private set {}
+        }
+
+        public bool IsReadOnly { get; }
     }
 }
 

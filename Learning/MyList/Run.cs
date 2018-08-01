@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using MyList;
 
 namespace MyListDemo
 {
     public class Run
     {
-        MyList list = new MyList();
+        MyList<int> list = new MyList<int>();
 
         public void AddToList()
         {
@@ -15,12 +17,14 @@ namespace MyListDemo
             list.Add(12);
             list.Add(13);
 
-            foreach (var i in list)
+            
+
+            foreach (int node in list)
             {
-                Console.WriteLine(i);
+                Console.WriteLine(node);
             }
 
-
+           
         }
     }
 
