@@ -5,9 +5,9 @@ namespace MyListDemo
 {
     public class Node<T>
     {
-        public Node(T number)
+        public Node(T item)
         {
-            Number = number;
+            Item = item;
         }
 
         public Node()
@@ -19,17 +19,19 @@ namespace MyListDemo
 
         public Node<T> FollowingItem;
 
-        public Node(T number, Node<T> initialItem)
+
+
+        public Node(T item, Node<T> initialItem)
         {
-            Number = number;
+            Item = item;
             InitialItem = initialItem;
         }
 
-        public T Number;
+        public T Item;
 
         public override string ToString()
         {
-            return Number.ToString();
+            return Item.ToString();
         }
     }
 

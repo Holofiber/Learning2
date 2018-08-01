@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MyListDemo
 {
-    public class MyList<T> : ICollection<T>
+    public class MyList<T> : ICollection<T>, IList<T>
     {
         public Node<T> head;
         private Node<T> tail;
@@ -12,7 +12,7 @@ namespace MyListDemo
 
         public MyList()
         {
-            
+
         }
 
         public void Add(T value)
@@ -23,10 +23,12 @@ namespace MyListDemo
             {
 
                 head = node;
+
             }
             else
             {
                 tail.FollowingItem = node;
+
 
                 node.InitialItem = tail;
 
@@ -40,7 +42,7 @@ namespace MyListDemo
         {
             this.items = items;
         }
-         IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             foreach (var item in items)
             {
@@ -59,7 +61,7 @@ namespace MyListDemo
                     yield break;
                 }
 
-                yield return currentNode.Number;
+                yield return currentNode.Item;
 
                 currentNode = currentNode.FollowingItem;
             }
@@ -77,7 +79,7 @@ namespace MyListDemo
                     yield break;
                 }
 
-                yield return currentNode.Number;
+                yield return currentNode.Item;
 
                 currentNode = currentNode.InitialItem;
             }
@@ -90,11 +92,11 @@ namespace MyListDemo
             return GetEnumerator();
         }
 
-        
+
 
         public void Clear()
         {
-            
+
         }
 
         public bool Contains(T item)
@@ -104,7 +106,7 @@ namespace MyListDemo
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            
+
         }
 
         public bool Remove(T item)
@@ -115,10 +117,29 @@ namespace MyListDemo
         public int Count
         {
             get => Count = count;
-            private set {}
+            private set { }
         }
 
         public bool IsReadOnly { get; }
+        public int IndexOf(T item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Insert(int index, T item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveAt(int index)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public T this[int index]
+        {
+            get => default(T); set => new System.NotImplementedException();
+        }
     }
 }
 

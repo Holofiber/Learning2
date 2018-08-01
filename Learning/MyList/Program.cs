@@ -10,6 +10,10 @@ namespace MyListDemo
     {
         static void Main(string[] args)
         {
+            List<int> list = new List<int>(){1,2,3,4,5};
+            var t = list.IndexOf(3);
+
+
             new Run().AddToList();
         }
     }
