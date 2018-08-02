@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MyList;
 using MyListDemo;
 
 namespace MyListTest
@@ -69,6 +70,34 @@ namespace MyListTest
             list.head.NextNode.NextNode.PrevNode.Item.Should().Be("B");
             list.head.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be("C");
             list.head.NextNode.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be("W");
+        }
+
+        [TestMethod]
+        public void Person_Type_Test2()
+        {
+
+
+            Person Sem = new Person("Sem", 76, "Male");
+            var Tom = new Person("Tom", 17, "Male");
+            var Kat = new Person("Kat", 45, "Female");
+            var Ann = new Person("Ann", 5, "Female");
+
+
+            MyList<Person> list = new MyList<Person>() { Sem, Tom, Kat, Ann };
+
+            list.head.Item.Should().Be(Sem);
+            list.head.NextNode.Item.Should().Be(Tom);
+            list.head.NextNode.NextNode.Item.Should().Be(Kat);
+            list.head.NextNode.NextNode.NextNode.Item.Should().Be(Ann);
+
+            list.head.NextNode.PrevNode.Item.Should().Be(Sem);
+            list.head.NextNode.NextNode.PrevNode.Item.Should().Be(Tom);
+            list.head.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be(Kat);
+
+            list.head.Item.Age.Should().Be(76);
+            list.head.Item.Name.Should().Be("Sem");
+            list.head.Item.Sex.Should().Be("Male");
+
         }
 
         [TestMethod]
