@@ -209,6 +209,7 @@ namespace MyListTest
             list.IndexOf("W").Should().Be(3);
             list.IndexOf("Z").Should().Be(4);
             list.IndexOf("F").Should().Be(-1);
+            list.IndexOf("F").Should().BeNegative();
         }
 
         [TestMethod]
@@ -216,7 +217,7 @@ namespace MyListTest
         {
             MyList<string> list = new MyList<string>() { "a", "b", "c", "d" };
 
-            list.Count.Should().Be(4);
+            list.Should().HaveCount(4);
             list.Remove("b").Should().BeTrue();
             list.Count.Should().Be(3);
             list.head.NextNode.Item.Should().Be("c");

@@ -13,9 +13,15 @@ namespace MyListDemo
             List<int> list = new List<int>() { 1, 2, 3, 4, 5 };
             var t = list.IndexOf(3);
 
+            string[] sArray = new string[10];
+
             List<string> stringList = new List<string>() { "a", "sad0", "sa" };
-            var z = stringList.IndexOf("aqqq");
-            var ttt = stringList[2];
+            stringList.CopyTo(sArray);
+
+            foreach (string s in sArray)
+            {
+                Console.WriteLine(s);
+            }
 
             new Run().AddToList();
         }

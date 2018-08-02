@@ -16,8 +16,18 @@ namespace MyListDemo
             list.Add(11.54);
             list.Add(12);
             list.Add(13.1);
-            
+            list.Add(13.5);
 
+            double[] zzz = new double[3];
+            
+            list.CopyTo(zzz, zzz.Length);
+
+            List<int> www = new List<int>(){1,2,3,4};
+
+            foreach (int i in www)
+            {
+                
+            }
             
 
             foreach (double node in list)
