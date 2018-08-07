@@ -2,16 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace MyListDemo
+namespace MyDListDemo
 {
-    public class MyList<T> : IList<T>
+    public class DList<T> : IList<T>
     {
         public Node<T> head;
         public Node<T> tail;
         private int count;
         private T[] items;
 
-        public MyList()
+        public DList()
         {
 
         }
@@ -22,24 +22,20 @@ namespace MyListDemo
 
             if (head == null)
             {
-
                 head = node;
-
             }
             else
             {
                 tail.NextNode = node;
 
-
                 node.PrevNode = tail;
-
             }
 
             tail = node;
             count++;
         }
 
-        public MyList(T[] items)
+        public DList(T[] items)
         {
             this.items = items;
         }
@@ -134,22 +130,10 @@ namespace MyListDemo
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            var tempNode = head;
-
-            for (int j = 0; j < arrayIndex; j++)
-            {
-                if (tempNode != null)
-                {
-                    array[j] = tempNode.Item;
-                    tempNode = tempNode.NextNode;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
+            throw new NotImplementedException();
         }
+
+
 
         public bool Remove(T item)
         {

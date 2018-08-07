@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyList;
-using MyListDemo;
+using MyDListDemo;
 
 namespace MyListTest
 {
@@ -38,7 +38,7 @@ namespace MyListTest
         [TestMethod]
         public void String_Type_Test()
         {
-            MyList<string> list = new MyList<string>();
+            DList<string> list = new DList<string>();
 
             list.Add("A");
 
@@ -50,7 +50,7 @@ namespace MyListTest
         [TestMethod]
         public void String_Type_Test2()
         {
-            MyList<string> list = new MyList<string>();
+            DList<string> list = new DList<string>();
 
 
             list.Add("A");
@@ -83,7 +83,7 @@ namespace MyListTest
             var Ann = new Person("Ann", 5, "Female");
 
 
-            MyList<Person> list = new MyList<Person>() { Sem, Tom, Kat, Ann };
+            DList<Person> list = new DList<Person>() { Sem, Tom, Kat, Ann };
 
             list.head.Item.Should().Be(Sem);
             list.head.NextNode.Item.Should().Be(Tom);
@@ -103,7 +103,7 @@ namespace MyListTest
         [TestMethod]
         public void Float_Type_Test()
         {
-            MyList<float> list = new MyList<float>();
+            DList<float> list = new DList<float>();
 
             list.Add(0.000000000000000000000000000000000000000000001f);
             // 45 ззнаків після коми, не точно показує
@@ -116,7 +116,7 @@ namespace MyListTest
         [TestMethod]
         public void Float_Type_Test2()
         {
-            MyList<float> list = new MyList<float>();
+            DList<float> list = new DList<float>();
 
 
             list.Add(0.0000000001f);
@@ -141,7 +141,7 @@ namespace MyListTest
         [TestMethod]
         public void Double_Type_Test()
         {
-            MyList<double> list = new MyList<double>();
+            DList<double> list = new DList<double>();
 
             list.Add(0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001);
             //100500 over знаків і тест фейлить, якщо змінити останній знак
@@ -154,7 +154,7 @@ namespace MyListTest
         [TestMethod]
         public void Count_Test()
         {
-            MyList<string> list = new MyList<string>();
+            DList<string> list = new DList<string>();
 
 
             list.Add("1");
@@ -178,7 +178,7 @@ namespace MyListTest
         [TestMethod]
         public void Clear_Test()
         {
-            MyList<string> list = new MyList<string>();
+            DList<string> list = new DList<string>();
 
 
             list.Add("A");
@@ -205,7 +205,7 @@ namespace MyListTest
         [TestMethod]
         public void Contains_Test()
         {
-            MyList<string> list = new MyList<string>();
+            DList<string> list = new DList<string>();
 
 
             list.Add("A");
@@ -223,7 +223,7 @@ namespace MyListTest
         [TestMethod]
         public void IndexOf_Test()
         {
-            MyList<string> list = new MyList<string>();
+            DList<string> list = new DList<string>();
 
 
             list.Add("A");
@@ -244,7 +244,7 @@ namespace MyListTest
         [TestMethod]
         public void Remove_Test()
         {
-            MyList<string> list = new MyList<string>() { "a", "b", "c", "d" };
+            DList<string> list = new DList<string>() { "a", "b", "c", "d" };
 
             list.Should().HaveCount(4);
             list.Remove("b").Should().BeTrue();
@@ -259,7 +259,7 @@ namespace MyListTest
         [TestMethod]
         public void Empty_List_Test()
         {
-            MyList<string> list = new MyList<string>();
+            DList<string> list = new DList<string>();
 
             list.IndexOf("q").Should().Be(-1);
             list.Contains("a").Should().BeFalse();

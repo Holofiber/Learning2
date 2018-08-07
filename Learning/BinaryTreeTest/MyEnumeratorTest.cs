@@ -31,7 +31,7 @@ namespace BinaryTreeTest
 
             var enumerator = tree.GetEnumerator();
 
-            enumerator.MoveNext().Should().BeFalse();
+            enumerator.MoveNext().Should().BeTrue();
 
             enumerator.Current.Should().Be(10);
 
@@ -40,7 +40,7 @@ namespace BinaryTreeTest
         }
 
         [TestMethod]
-        public void Tree_With_Left_Node_Test()
+        public void Add_Value_Check_Sorting_Test()
         {
             ICollection<int> tree = new Tree<int>();
 
@@ -78,15 +78,13 @@ namespace BinaryTreeTest
             enumerator.Current.Should().Be(35);
 
             enumerator.MoveNext().Should().BeFalse();
-
-
         }
 
 
         [TestMethod]
         public void Sorting_Tree_Test()
         {
-            ICollection<int> tree = new Tree<int>() { 20, 30, 35, 25, 10, 5, 8 };
+            ICollection<int> tree = new Tree<int>() { 20, 30, 35, 25, 10, 5, 15 };
 
             List<int> list = new List<int>() { 20, 30, 35, 25, 10, 5, 15 };
             list.Sort();
@@ -98,32 +96,20 @@ namespace BinaryTreeTest
                 sortFromTree.Add(i);
             }
 
-            list.Should().BeSameAs(sortFromTree);
+            for (int i = 0; i < list.Count; i++)
+            {
+                sortFromTree[i].Should().Be(list[i]);
+            }
+        }
 
+        [TestMethod]
+        public void Tree_Count_Test()
+        {
+            ICollection<int> tree = new Tree<int>() { 20, 30, 35, 25, 10, 5, 15 };
+
+            tree.Count.Should().Be(7);
 
         }
 
-
-
-        /* [TestMethod]
-         public void Tree_With_Right_Node_Test()
-         {
-             ICollection<int> tree = new Tree<int>();
-
-             tree.Add(10);
-             tree.Add(15);
-
-
-             var enumerator = tree.GetEnumerator();
-             enumerator.Current.Should().Be(10);
-
-             enumerator.MoveNext().Should().BeTrue();
-
-             enumerator.Current.Should().Be(15);
-
-             enumerator.MoveNext().Should().BeFalse();
-
-
-         }*/
     }
 }

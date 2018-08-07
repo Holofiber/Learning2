@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MyListDemo;
+using MyDListDemo;
 
 namespace MyListTest
 {
@@ -13,7 +13,7 @@ namespace MyListTest
         [TestMethod]
         public void TestMethod1()
         {
-            MyList<int> list = new MyList<int>();
+            DList<int> list = new DList<int>();
 
             list.Add(10);
 
@@ -25,7 +25,7 @@ namespace MyListTest
         [TestMethod]
         public void TestMethod2()
         {
-            MyList<int> list = new MyList<int>();
+            DList<int> list = new DList<int>();
 
             list.Add(10);
             list.Add(11);
@@ -38,7 +38,7 @@ namespace MyListTest
         [TestMethod]
         public void TestMethod3()
         {
-            MyList<int> list = new MyList<int>();
+            DList<int> list = new DList<int>();
 
 
             list.Add(10);
@@ -58,22 +58,6 @@ namespace MyListTest
             list.head.NextNode.NextNode.PrevNode.Item.Should().Be(11);
             list.head.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be(12);
             list.head.NextNode.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be(13);
-        }
-
-        [TestMethod]
-        public void MyTestMethod()
-        {
-            Class1 testclass = new Class1();
-
-            foreach (int i in testclass)
-            {
-                Console.WriteLine(i);
-            }
-
-            foreach (int i in testclass.GetEnumerator2())
-            {
-                Console.WriteLine(i);
-            }
         }
     }
 }

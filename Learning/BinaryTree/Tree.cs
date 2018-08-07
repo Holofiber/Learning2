@@ -12,6 +12,7 @@ namespace BinaryTree
         public void Add(T item)
         {
             Add(item, RootNode);
+            Count++;
         }
 
         public void Clear()
@@ -34,7 +35,8 @@ namespace BinaryTree
             throw new NotImplementedException();
         }
 
-        public int Count { get; }
+        public int Count { get; set; }
+
         public bool IsReadOnly { get; }
 
 
@@ -45,7 +47,7 @@ namespace BinaryTree
                 if (RootNode == null)
                 {
                     RootNode = new Node<T>();
-                    RootNode.NodeNumber = nodeValue;
+                    RootNode.Value = nodeValue;
                 }
                 else
                 {
@@ -63,10 +65,10 @@ namespace BinaryTree
         {
             Node<T> nextNode = new Node<T>();
 
-            nextNode.NodeNumber = nodeValue;
+            nextNode.Value = nodeValue;
             nextNode.BackReference = node;
 
-            if (node.NodeNumber.CompareTo(nodeValue) >= 1)
+            if (node.Value.CompareTo(nodeValue) >= 1)
             {
                 if (node.LeftReference == null)
                 {
@@ -95,16 +97,14 @@ namespace BinaryTree
 
         public IEnumerator<T> GetEnumerator()
         {
+            if (RootNode == null)
+                yield break;
 
-
-            return new MyEnumerator(RootNode);
+            foreach (var item in RootNode)
+            {
+                yield return item;
+            }
         }
-
-
-        /*public IEnumerator<T> GetMyEnumerator()
-        {
-            return new MyEnumerator(RootNode);
-        }*/
 
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -112,148 +112,38 @@ namespace BinaryTree
         }
 
 
-        class MyEnumerator : IEnumerator<T>
+        public class Node<T> : IEnumerable<T>
         {
-            private Node<T> InitialNode;
-            private Stack<(Node<T>, Side)> Nodes { get; set; } = new Stack<(Node<T>, Side)>();
-
-
-            public MyEnumerator(Node<T> root)
+            public T Value;
+            public Node<T> BackReference;
+            public Node<T> LeftReference;
+            public Node<T> RightReference;
+            public IEnumerator<T> GetEnumerator()
             {
-                InitialNode = root;
-            }
-
-            public void Dispose()
-            {
-            }
-
-
-            private Node<T> CurrentNode;
-            Side side = Side.None;
-
-            public bool MoveNext()
-            {
-                if (side == Side.None)
+                if (LeftReference != null)
                 {
-                    CurrentNode = InitialNode;
+                    foreach (var item in LeftReference)
+                    {
+                        yield return item;
+                    }
                 }
 
+                yield return Value;
 
-
-                if (CurrentNode == null)
+                if (RightReference != null)
                 {
-                    return false;
+                    foreach (var item in RightReference)
+                    {
+                        yield return item;
+                    }
                 }
-
-                // Current = CurrentNode.NodeNumber;
-
-                while (CurrentNode != null)
-                {
-
-
-                    if (side == Side.None)
-                    {
-                        return MoveLeft();
-                    }
-
-                    if (side == Side.Right)
-                    {
-                        return MoveRight();
-                    }
-
-                    if (side == Side.Left)
-                    {
-                        return MoveLeft();
-                    }
-
-
-                    if (side == Side.Back)
-                    {
-                        CurrentNode = CurrentNode.BackReference;
-                        Nodes.Push((CurrentNode, Side.Back));
-                        Current = CurrentNode.NodeNumber;
-                        side = Side.Right;
-                        return true;
-                    }
-
-
-
-
-                }
-
-                // (CurrentNode, side) = Nodes.Pop();
-
-                return false;
             }
 
-            private bool MoveLeft()
+            IEnumerator IEnumerable.GetEnumerator()
             {
-
-                if (CurrentNode.LeftReference == null && CurrentNode.RightReference == null)
-                {
-                    return false;
-                }
-                while (CurrentNode.LeftReference != null)
-                {
-                    CurrentNode = CurrentNode.LeftReference;
-                }
-
-                side = Side.Back;
-                Current = CurrentNode.NodeNumber;
-
-                return true;
+                return GetEnumerator();
             }
 
-            private bool MoveRight()
-            {
-                if (CurrentNode.RightReference != null)
-                {
-                    CurrentNode = CurrentNode.RightReference;
-                    if (CurrentNode.LeftReference != null)
-                    {
-                        while (CurrentNode.LeftReference != null)
-                        {
-                            CurrentNode = CurrentNode.LeftReference;
-                        }
-                    }
-                    else if (CurrentNode.RightReference != null)
-                    {
-
-                    }
-
-                    Current = CurrentNode.NodeNumber;
-
-                    return true;
-
-                }
-                //TODO  need change
-                return true;
-            }
-
-
-            enum Side
-            {
-                None,
-                Back,
-                Left,
-                Right
-            }
-
-
-            public void Reset()
-            {
-            }
-
-            public T Current
-            {
-                get { return InitialNode.NodeNumber; }
-                set => InitialNode.NodeNumber = value;
-            }
-
-            object IEnumerator.Current
-            {
-                get { return Current; }
-            }
         }
     }
 }

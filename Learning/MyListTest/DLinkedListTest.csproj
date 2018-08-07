@@ -54,7 +54,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="MyListGenericTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyList\MyListDemo.csproj">
+    <ProjectReference Include="..\MyList\DLinkedList.csproj">
       <Project>{87881c3e-d231-4a87-809d-006f95f9735a}</Project>
-      <Name>MyListDemo</Name>
+      <Name>DLinkedList</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

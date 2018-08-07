@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MyListDemo
+namespace MyDListDemo
 {
     public class Node<T>
     {
