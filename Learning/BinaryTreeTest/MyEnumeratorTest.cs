@@ -12,7 +12,7 @@ namespace BinaryTreeTest
         [TestMethod]
         public void EmpptyTree_Test()
         {
-            Tree tree = new Tree();
+            ICollection<int> tree = new Tree<int>();
 
             var enumur = tree.GetEnumerator();
 
@@ -24,33 +24,106 @@ namespace BinaryTreeTest
         [TestMethod]
         public void Tree_With_Only_Root_Test()
         {
-            Tree tree = new Tree();
+            ICollection<int> tree = new Tree<int>();
+
 
             tree.Add(10);
 
             var enumerator = tree.GetEnumerator();
 
-            enumerator.MoveNext().Should().BeTrue();
+            enumerator.MoveNext().Should().BeFalse();
 
             enumerator.Current.Should().Be(10);
 
             enumerator.MoveNext().Should().BeFalse();
-            
+
         }
 
-       /* [TestMethod]
+        [TestMethod]
         public void Tree_With_Left_Node_Test()
         {
-            Tree tree = new Tree();
+            ICollection<int> tree = new Tree<int>();
 
+            tree.Add(20);
             tree.Add(10);
-            tree.Add(7);
+            tree.Add(30);
+            tree.Add(5);
+            tree.Add(15);
+            tree.Add(25);
+            tree.Add(35);
+
+
 
             var enumerator = tree.GetEnumerator();
 
-            enumerator.MoveNext();
+            enumerator.MoveNext().Should().BeTrue();
+            enumerator.Current.Should().Be(5);
 
-            enumerator.Current.Should().Be(7);
-        }*/
+            enumerator.MoveNext().Should().BeTrue();
+            enumerator.Current.Should().Be(10);
+
+            enumerator.MoveNext().Should().BeTrue();
+            enumerator.Current.Should().Be(15);
+
+            enumerator.MoveNext().Should().BeTrue();
+            enumerator.Current.Should().Be(20);
+
+            enumerator.MoveNext().Should().BeTrue();
+            enumerator.Current.Should().Be(25);
+
+            enumerator.MoveNext().Should().BeTrue();
+            enumerator.Current.Should().Be(30);
+
+            enumerator.MoveNext().Should().BeTrue();
+            enumerator.Current.Should().Be(35);
+
+            enumerator.MoveNext().Should().BeFalse();
+
+
+        }
+
+
+        [TestMethod]
+        public void Sorting_Tree_Test()
+        {
+            ICollection<int> tree = new Tree<int>() { 20, 30, 35, 25, 10, 5, 8 };
+
+            List<int> list = new List<int>() { 20, 30, 35, 25, 10, 5, 15 };
+            list.Sort();
+
+            List<int> sortFromTree = new List<int>();
+
+            foreach (var i in tree)
+            {
+                sortFromTree.Add(i);
+            }
+
+            list.Should().BeSameAs(sortFromTree);
+
+
+        }
+
+
+
+        /* [TestMethod]
+         public void Tree_With_Right_Node_Test()
+         {
+             ICollection<int> tree = new Tree<int>();
+
+             tree.Add(10);
+             tree.Add(15);
+
+
+             var enumerator = tree.GetEnumerator();
+             enumerator.Current.Should().Be(10);
+
+             enumerator.MoveNext().Should().BeTrue();
+
+             enumerator.Current.Should().Be(15);
+
+             enumerator.MoveNext().Should().BeFalse();
+
+
+         }*/
     }
 }

@@ -1,15 +1,19 @@
-﻿namespace BinaryTree
-{
-    public class Node
-    {
-        public int NodeNumber;
-        public Node BackReference;
-        public Node LeftReference;
-        public Node RightReference;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
-        public override string ToString()
-        {
-            return NodeNumber.ToString();
-        }
+namespace BinaryTree
+{
+    public class Node<T> where T : IComparable<T>
+    {
+        public T NodeNumber;
+        public Node<T> BackReference;
+        public Node<T> LeftReference;
+        public Node<T> RightReference;
+       
+       
     }
+
+   
+    
 }

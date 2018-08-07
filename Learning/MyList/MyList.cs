@@ -52,6 +52,8 @@ namespace MyListDemo
             }
         }
 
+
+
         public IEnumerator<T> GetEnumerator()
         {
             var currentNode = head;
@@ -70,7 +72,7 @@ namespace MyListDemo
 
         }
 
-        public IEnumerator<T> GetEnumeratorReverse()
+        public IEnumerable<T> GetEnumeratorReverse()
         {
             var currentNode = tail;
 

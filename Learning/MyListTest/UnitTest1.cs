@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyListDemo;
@@ -58,6 +60,20 @@ namespace MyListTest
             list.head.NextNode.NextNode.NextNode.NextNode.PrevNode.Item.Should().Be(13);
         }
 
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            Class1 testclass = new Class1();
 
+            foreach (int i in testclass)
+            {
+                Console.WriteLine(i);
+            }
+
+            foreach (int i in testclass.GetEnumerator2())
+            {
+                Console.WriteLine(i);
+            }
+        }
     }
 }
