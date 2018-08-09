@@ -7,7 +7,7 @@ namespace BinaryTree
 {
     public class Tree<T> : ICollection<T> where T : IComparable<T>
     {
-        private Node<T> RootNode;
+        private Node RootNode;
 
         public void Add(T item)
         {
@@ -40,13 +40,13 @@ namespace BinaryTree
         public bool IsReadOnly { get; }
 
 
-        private void Add(T nodeValue, Node<T> node = null)
+        private void Add(T nodeValue, Node node = null)
         {
             if (node == null)
             {
                 if (RootNode == null)
                 {
-                    RootNode = new Node<T>();
+                    RootNode = new Node();
                     RootNode.Value = nodeValue;
                 }
                 else
@@ -61,9 +61,9 @@ namespace BinaryTree
             }
         }
 
-        private void NodesReview(Node<T> node, T nodeValue)
+        private void NodesReview(Node node, T nodeValue)
         {
-            Node<T> nextNode = new Node<T>();
+            Node nextNode = new Node();
 
             nextNode.Value = nodeValue;
             nextNode.BackReference = node;
@@ -112,12 +112,12 @@ namespace BinaryTree
         }
 
 
-        public class Node<T> : IEnumerable<T>
+        public class Node : IEnumerable<T>
         {
             public T Value;
-            public Node<T> BackReference;
-            public Node<T> LeftReference;
-            public Node<T> RightReference;
+            public Node BackReference;
+            public Node LeftReference;
+            public Node RightReference;
             public IEnumerator<T> GetEnumerator()
             {
                 if (LeftReference != null)

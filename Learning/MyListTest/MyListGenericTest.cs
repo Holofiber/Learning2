@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using FluentAssertions;
+using FluentAssertions.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyList;
 using MyDListDemo;
@@ -75,7 +76,7 @@ namespace MyListTest
         [TestMethod]
         public void Person_Type_Test2()
         {
-
+            DateTime dateTime = 8.August(2018);
 
             Person Sem = new Person("Sem", 76, "Male");
             var Tom = new Person("Tom", 17, "Male");
@@ -86,7 +87,7 @@ namespace MyListTest
             DList<Person> list = new DList<Person>() { Sem, Tom, Kat, Ann };
 
             list.head.Item.Should().Be(Sem);
-            list.head.NextNode.Item.Should().Be(Tom);
+            list.head.NextNode.Item.Should().Be(Tom).And.NotBe(Kat);
             list.head.NextNode.NextNode.Item.Should().Be(Kat);
             list.head.NextNode.NextNode.NextNode.Item.Should().Be(Ann);
 

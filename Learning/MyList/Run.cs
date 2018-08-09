@@ -28,6 +28,7 @@ namespace MyDListDemo
             list.Add(13.1);
             list.Add(13.5);
 
+
             Console.WriteLine(@"\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/");
             foreach (double node in list)
             {

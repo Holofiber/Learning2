@@ -162,7 +162,6 @@ namespace MyDListDemo
                 if (tempNode.NextNode == null)
                 {
                     return false;
-                    break;
                 }
                 tempNode = tempNode.NextNode;
 
