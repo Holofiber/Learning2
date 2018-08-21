@@ -1,4 +1,6 @@
-﻿namespace DI_Container
+﻿using System.Diagnostics;
+
+namespace DI_Container
 {
     public class Executor
     {
@@ -10,6 +12,8 @@
         {
             this.logger = logger;
             this.accountManager = accountManager;
+
+            Debug.WriteLine($"{nameof(Executor)} created");
         }
 
         public void Start()

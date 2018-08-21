@@ -1,4 +1,6 @@
-﻿namespace DI_Container
+﻿using System.Diagnostics;
+
+namespace DI_Container
 {
     public class MainBusinessLogic
     {
@@ -7,6 +9,8 @@
         public MainBusinessLogic(ILogger logger)
         {
             this.logger = logger;
+
+            Debug.WriteLine(nameof(MainBusinessLogic) + "created");
         }
 
 

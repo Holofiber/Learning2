@@ -50,7 +50,7 @@
     <Compile Include="AccountFactory.cs" />
     <Compile Include="AccountManager.cs" />
     <Compile Include="Executor.cs" />
-    <Compile Include="OrderValidator.cs" />
+    <Compile Include="InternalAccountChecker.cs" />
     <Compile Include="Services\ICache.cs" />
     <Compile Include="Services\ILogger.cs" />
     <Compile Include="Services\IValidator.cs" />

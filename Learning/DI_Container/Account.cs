@@ -1,14 +1,18 @@
-﻿namespace DI_Container
+﻿using System.Diagnostics;
+
+namespace DI_Container
 {
     public class Account
     {
         private readonly ILogger logger;
-        private OrderValidator orderValidator;
+        private InternalAccountChecker internalAccountChecker;
 
-        public Account(ILogger logger, IValidator validator)
+        public Account(ILogger logger, InternalAccountChecker internalAccountChecker)
         {
             this.logger = logger;
-            orderValidator = new OrderValidator(logger, validator);
+            this.internalAccountChecker = internalAccountChecker;
+
+            Debug.WriteLine($"{nameof(Account)} created");
         }
     }
 }

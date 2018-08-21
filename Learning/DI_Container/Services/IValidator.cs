@@ -1,4 +1,6 @@
-﻿namespace DI_Container
+﻿using System.Diagnostics;
+
+namespace DI_Container
 {
     public interface IValidator
     {
@@ -14,6 +16,10 @@
     }
     public class DateValidator : IValidator
     {
+        public DateValidator()
+        {
+            Debug.WriteLine("DateValidator Created");
+        }
         public bool Check()
         {
             return true;

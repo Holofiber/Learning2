@@ -1,4 +1,6 @@
-﻿namespace DI_Container
+﻿using System.Diagnostics;
+
+namespace DI_Container
 {
     public interface ILogger
     {
@@ -15,6 +17,10 @@
 
     public class ConsoleLogger : ILogger
     {
+        public ConsoleLogger()
+        {
+            Debug.WriteLine("ConsoleLogger Created");
+        }
         public void Log(string msg)
         {
 

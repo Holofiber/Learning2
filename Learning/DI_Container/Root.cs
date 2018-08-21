@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 using Autofac;
 
 namespace DI_Container
@@ -9,29 +10,16 @@ namespace DI_Container
         private readonly Executor executor;
         private ILogger logger;
 
-        public ContainerBuilder builder = new ContainerBuilder();
 
-        public Root()
+
+        public Root(MainBusinessLogic businessLogic, Executor executor, ILogger logger)
         {
-            logger = new ConsoleLogger();
 
-            builder.RegisterInstance(new DateValidator()).As<IValidator>();
-            builder.RegisterInstance(logger).As<ILogger>();
+            this.businessLogic = businessLogic;
+            this.executor = executor;
+            this.logger = logger;
 
-
-           /* builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(Root)))
-                .Where(t => t.Name.EndsWith("Account")).AsImplementedInterfaces();*/
-
-            var container = builder.Build();
-
-            IValidator validator = new DateValidator();
-            this.businessLogic = new MainBusinessLogic(logger);
-
-            var accountFactory = new AccountFactory();
-
-            var accountManager = new AccountManager(logger, accountFactory);
-
-            this.executor = new Executor(logger, accountManager);
+            Debug.WriteLine("Root created");
         }
 
         public void Run()

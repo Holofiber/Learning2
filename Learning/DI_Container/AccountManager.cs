@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 
 namespace DI_Container
@@ -13,7 +14,7 @@ namespace DI_Container
         {
             this.logger = logger;
             this.accountFactory = accountFactory;
-
+            Debug.WriteLine($"{nameof(AccountManager)} created");
 
             for (int i = 0; i < 3; i++)
             {

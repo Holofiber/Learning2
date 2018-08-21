@@ -1,20 +1,31 @@
-﻿namespace DI_Container
+﻿using System.Diagnostics;
+using Autofac;
+using Autofac.Core;
+
+namespace DI_Container
 {
     public class AccountFactory
     {
         private readonly ILogger logger;
         private readonly IValidator validator;
+        private readonly ILifetimeScope scope;
 
-        public AccountFactory()
+
+
+        public AccountFactory(ILogger logger, IValidator validator, ILifetimeScope scope)
         {
             this.logger = logger;
             this.validator = validator;
+            this.scope = scope;
+
+            Debug.WriteLine($"{nameof(AccountFactory)} created");
         }
 
 
         public Account Create()
         {
-            return new Account(logger, validator);
+
+            return scope.Resolve<Account>();
         }
     }
 }
