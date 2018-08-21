@@ -13,12 +13,13 @@ namespace CrytoSignalTest
     {
         static async Task Main(string[] args)
         {
+            
+                MarketDataApi api = new MarketDataApi(MarketDataApi.ProductionUrl);
+                api.Connect();
 
-            MarketDataApi api = new MarketDataApi(MarketDataApi.ProductionUrl);
-            api.Connect();
-
-            var subscribResponse = await api.SubscribeOnTickerUpdates(MarketSummarySubscriptionCriteria.From(Exchanges.Binance),
-                block => { Console.WriteLine(block); });
+                var subscribResponse = await api.SubscribeOnTickerUpdates(MarketSummarySubscriptionCriteria.From(Exchanges.Binance),
+                    block => { Console.WriteLine(block); });
+            
             api.UnsubscribeFromTickerUpdates(subscribResponse.Id);
 
             var tikerBlock = await api.GetTickersBlock();

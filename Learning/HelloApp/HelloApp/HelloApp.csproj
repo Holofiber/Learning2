@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Name.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MarketData.Public.Api" Version="1.4.12" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.561731" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="Name.xaml" />
+  </ItemGroup>
+</Project>
