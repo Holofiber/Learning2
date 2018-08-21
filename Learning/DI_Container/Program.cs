@@ -17,7 +17,11 @@ namespace DI_Container
             ContainerBuilder builder = new ContainerBuilder();
 
             builder.RegisterType<ConsoleLogger>().As<ILogger>().SingleInstance();
+
             builder.RegisterType<DateValidator>().As<IValidator>().SingleInstance();
+
+            builder.RegisterType<PhoneNumberValidator>().AsSelf().AsImplementedInterfaces();
+            builder.RegisterType<DateValidator>().AsSelf().AsImplementedInterfaces();
 
             builder.RegisterType<Root>().SingleInstance();
             builder.RegisterType<Executor>().SingleInstance();
@@ -36,10 +40,15 @@ namespace DI_Container
 
             Root myApplication = container.Resolve<Root>();
 
-
+            var ttt = container.Resolve<IEnumerable<IValidator>>();
+            foreach (var validator in ttt)
+            {
+                Console.WriteLine(validator.GetType().Name);
+            }
             //-----------------------------------------------
 
             myApplication.Run();
+
 
             Console.ReadLine();
         }
