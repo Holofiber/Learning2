@@ -2,9 +2,10 @@
 {
     public class Phone
     {
-        public string Name { get; set; }
-        public Company Company { get; set; }
-        public int Price { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Company { get; set; }
+        
     }
 
     public class Company

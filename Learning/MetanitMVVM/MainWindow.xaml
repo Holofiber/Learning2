@@ -10,22 +10,16 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="550" Width="550">
+        Title="MainWindow" Height="700" Width="1500">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <ListBox x:Name="phonesList" />
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 15 0 0" HorizontalAlignment="Center">
-            <TextBox Name="phoneTextBox" Width="190" />
-            <Button Content="Сохранить" MaxWidth="170" Margin="10 0 0 0" Click="Button_Click" />
-        </StackPanel>
+        <local:TradeHistoryControl HorizontalAlignment="Left" Height="469" Margin="122,121,0,0" VerticalAlignment="Top" Width="500" />
+        <local:TradeHistoryControl HorizontalAlignment="Left" Height="505" Margin="761,85,0,0" VerticalAlignment="Top" Width="388"/>
+
     </Grid>
 
 </Window>

@@ -21,22 +21,29 @@ namespace MetanitMVVM
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<string> phones;
+        public ObservableCollection<TradeOrder> Trades { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
 
-            phones = new ObservableCollection<string> { "IPhone", "Nexus", "Android", "DomoPhone" };
-            phonesList.ItemsSource = phones;
+            Trades = new ObservableCollection<TradeOrder>
+            {
+                new TradeOrder{Price = 123, Amount = 0.98f, Time = DateTime.Now},
+                new TradeOrder{Price = 123, Amount = 0.98f, Time = DateTime.Now},
+                new TradeOrder{Price = 123, Amount = 0.98f, Time = DateTime.Now},
+                new TradeOrder{Price = 123, Amount = 0.98f, Time = DateTime.Now},
+                new TradeOrder{Price = 123, Amount = 0.98f, Time = DateTime.Now},
+            };
+
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string phone = phoneTextBox.Text;
-            phones.Add(phone);
-        }
+
+
+
+
+
     }
 
 
