@@ -1,0 +1,29 @@
+﻿<Window x:Class="PrismStartedDemo.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        
+        xmlns:viewModels="clr-namespace:PrismStartedDemo.ViewModels"
+        xmlns:model="clr-namespace:PrismStartedDemo.Model"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        >
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Window.DataContext>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBox x:Name="TheNumber" Width="50" Margin="5" />
+            <Button Content="Add" Margin="5" Command="{Binding AddCommand}"
+                    CommandParameter="{Binding ElementName=TheNumber, Path=Text}" />
+        </StackPanel>
+
+        <TextBox DockPanel.Dock="Bottom" Text="{Binding Sum, Mode=OneWay}" Margin="5" />
+
+        <Button DockPanel.Dock="Right" VerticalAlignment="Top" Content="Remove"
+                Width="130" Margin="5"
+                Command="{Binding RemoveCommand}"
+                CommandParameter="{Binding ElementName=TheListBox, Path=SelectedIndex}" />
+
+        <ListBox x:Name="TheListBox" ItemsSource="{Binding myValues}" />
+    </DockPanel>
+</Window>
