@@ -14,13 +14,18 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="700" Width="1500">
+        Title="MainWindow" Height="Auto" Width="Auto">
 
     <Grid>
-       
-        <local:TradeHistoryControl HorizontalAlignment="Left" Height="505" Margin="989,65,0,0" VerticalAlignment="Top" Width="355"/>
-        <local:OrderEntryWindow HorizontalAlignment="Left" Height="500" Margin="131,70,0,0" VerticalAlignment="Top" Width="800"/>
+        <UniformGrid Columns="2" >
+            <local:OrderEntryTabs HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto"/>
+            <local:OrderEntryWindow HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto" />
+            
+           
 
+        </UniformGrid>
+
+        
     </Grid>
 
 </Window>
