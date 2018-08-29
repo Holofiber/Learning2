@@ -17,8 +17,8 @@
         Title="MainWindow" Height="700" Width="1500">
 
     <Grid>
-        <local:TradeHistoryControl HorizontalAlignment="Left" Height="469" Margin="122,121,0,0" VerticalAlignment="Top" Width="500" />
-        <local:TradeHistoryControl HorizontalAlignment="Left" Height="505" Margin="761,85,0,0" VerticalAlignment="Top" Width="388"/>
+        <local:TradeHistoryControl HorizontalAlignment="Left" Height="469" Margin="122,121,0,0" VerticalAlignment="Top" Width="494" />
+        <local:TradeHistoryControl HorizontalAlignment="Left" Height="505" Margin="761,85,0,0" VerticalAlignment="Top" Width="355"/>
 
     </Grid>
 

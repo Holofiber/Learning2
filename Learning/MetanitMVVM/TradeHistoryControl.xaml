@@ -32,7 +32,7 @@
                     <TextBlock Text="Trade History" Style="{StaticResource MaterialDesignTitleTextBlock}" />
                 </Label>
 
-                <Button Name="Market" Grid.Column="1" Margin="5"
+                <!-- <Button Name="Market" Grid.Column="1" Margin="5"
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
 
                         ToolTip="Resource name: MaterialDesignRaisedLightButton">
@@ -42,7 +42,7 @@
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
                         ToolTip="Resource name: MaterialDesignRaisedLightButton">
                     Yours
-                </Button>
+                </Button>-->
             </Grid>
 
             <!-- <Button Grid.Column="0" Grid.Row="0" Content="Строка 0 Столбец 0" />
@@ -50,9 +50,9 @@
         <Button Grid.Column="2" Grid.Row="2" Content="Строка 2 Столбец 2" />-->
 
         </Grid>
-        <Grid Row="1" HorizontalAlignment="Center">
-            <ListView
-                ItemsSource="{Binding Source={StaticResource }}">
+        <Grid Row="1"  Margin="10,0" >
+            <ListView 
+                ItemsSource="{Binding Trades }">
                 <ListView.View >
                     <GridView>
                         <GridViewColumn
@@ -62,7 +62,7 @@
                             DisplayMemberBinding="{Binding Amount}"
                             Header="Amount" />
                         <GridViewColumn
-                            DisplayMemberBinding="{Binding Time}"
+                            DisplayMemberBinding="{Binding Path=Time, StringFormat='hh:mm:ss' }"
                             Header="Time" />
                     </GridView>
                 </ListView.View>

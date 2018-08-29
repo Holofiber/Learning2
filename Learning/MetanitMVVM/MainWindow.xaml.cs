@@ -27,6 +27,8 @@ namespace MetanitMVVM
         {
             InitializeComponent();
 
+            DataContext = this;
+
             Trades = new ObservableCollection<TradeOrder>
             {
                 new TradeOrder{Price = 123, Amount = 0.98f, Time = DateTime.Now},
@@ -36,8 +38,21 @@ namespace MetanitMVVM
                 new TradeOrder{Price = 123, Amount = 0.98f, Time = DateTime.Now},
             };
 
+            GenerateTrade(20);
         }
 
+        public void GenerateTrade(int k)
+        {
+            TradeOrder order = new TradeOrder { Price = 123, Amount = 0.98f, Time = DateTime.Now };
+
+            for (int i = 0; i < k; i++)
+            {
+
+                Trades.Add(new TradeOrder { Price = order.Price + i, Amount = order.Amount + i, Time = order.Time });
+            }
+
+
+        }
 
 
 
