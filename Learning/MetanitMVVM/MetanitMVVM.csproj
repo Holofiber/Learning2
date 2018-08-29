@@ -61,6 +61,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OrderEntryWindow.xaml.cs">
+      <DependentUpon>OrderEntryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrderEntryTabs.xaml.cs">
+      <DependentUpon>OrderEntryTabs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TradeHistoryControl.xaml.cs">
       <DependentUpon>TradeHistoryControl.xaml</DependentUpon>
     </Compile>
@@ -78,6 +84,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OrderEntryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OrderEntryTabs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TradeHistoryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
