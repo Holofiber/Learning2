@@ -21,18 +21,19 @@
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightForegroundBrush}" />
             </Style>
 
-            <Style x:Key="LabelTextStyle">
-                <Setter Property="Control.HorizontalAlignment" Value="Left"></Setter>
-                <Setter Property="Control.VerticalAlignment" Value="Center"></Setter>
-                <Setter Property="Control.Margin" Value="10 0 0 0"></Setter>
+            <Style x:Key="LabelTextStyle" TargetType="{x:Type Label}">
+                <Setter Property="Control.HorizontalAlignment" Value="Left" />
+                <Setter Property="Control.VerticalAlignment" Value="Center" />
+                <Setter Property="Control.Margin" Value="10 0 0 0" />
             </Style>
 
-            <Style x:Key="TextBoxStyle"  TargetType="{x:Type TextBox}">
-                <Setter Property="Height" Value="40"></Setter>
-                <Setter Property="Margin" Value="5 5 5 5"></Setter>
-                <Setter Property="Background" Value="WhiteSmoke"></Setter>
-              
-                
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Height" Value="40" />
+                <Setter Property="Margin" Value="5 5 5 5" />
+                <Setter Property="Background" Value="WhiteSmoke" />
+                <Setter Property="Foreground" Value="Blue" />
+
+
             </Style>
         </Grid.Resources>
         <!-- Styles end
@@ -44,7 +45,7 @@
 
             <ColumnDefinition Width="0.3*" />
             <ColumnDefinition Width="*" />
-           
+
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -59,8 +60,7 @@
         <Grid Column="0" Row="0">
             <Label HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 10 0">
                 <TextBlock
-                    Text="Buy ADA"
-                     />
+                    Text="Buy ADA" />
             </Label>
         </Grid>
 
@@ -79,8 +79,7 @@
         <Grid Column="2" Row="0">
             <Label HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 10 0">
                 <TextBlock
-                    Text="Sell ADA"
-                     />
+                    Text="Sell ADA" />
             </Label>
         </Grid>
         <Grid Column="3" Row="0">
@@ -100,28 +99,28 @@
             </Label>
         </Grid>
         <Grid Column="0" Row="2">
-            <Label  Style="{StaticResource LabelTextStyle}">
+            <Label Style="{StaticResource LabelTextStyle}">
                 <TextBlock Text="Limit:" />
             </Label>
         </Grid>
         <Grid Column="0" Row="3">
-            <Label  Style="{StaticResource LabelTextStyle}">
+            <Label Style="{StaticResource LabelTextStyle}">
                 <TextBlock Text="Amount:" />
             </Label>
         </Grid>
         <Grid Column="0" Row="5">
-            <Label  Style="{StaticResource LabelTextStyle}">
+            <Label Style="{StaticResource LabelTextStyle}">
                 <TextBlock Text="Total:" />
             </Label>
         </Grid>
         <Grid Column="2" Row="1">
-            <Label  Style="{StaticResource LabelTextStyle}">
+            <Label Style="{StaticResource LabelTextStyle}">
                 <TextBlock Text="Stop:" />
             </Label>
         </Grid>
 
         <Grid Column="2" Row="2">
-            <Label  Style="{StaticResource LabelTextStyle}">
+            <Label Style="{StaticResource LabelTextStyle}">
                 <TextBlock Text="Limit:" />
             </Label>
         </Grid>
@@ -131,32 +130,32 @@
             </Label>
         </Grid>
         <Grid Column="2" Row="5">
-            <Label  Style="{StaticResource LabelTextStyle}">
+            <Label Style="{StaticResource LabelTextStyle}">
                 <TextBlock Text="Total:" />
             </Label>
         </Grid>
 
         <Grid Row="1" Column="1">
-            <TextBox  Text="0.00001" Style="{StaticResource TextBoxStyle}" />
+            <TextBox Name="BuyStopTxt" Text="0.00001" />
         </Grid>
 
         <Grid Row="2" Column="1">
-            <TextBox Text="0.00" Style="{StaticResource TextBoxStyle}" />
+            <TextBox Name="BuyLimitTxt" Text="0.00" />
         </Grid>
 
-        <Grid Row="3" Column="1">
-            <TextBox Text="0.1" Style="{StaticResource TextBoxStyle}" />
+        <Grid Row="3" Column="1" Name="BuyAmount">
+            <TextBox Name="BuyAmountTxt" Text="0.1" />
         </Grid>
         <Grid Row="1" Column="3">
-            <TextBox Text="0.00001" Style="{StaticResource TextBoxStyle}" />
+            <TextBox Name="SellStopTxt" Text="0.00001" />
         </Grid>
 
         <Grid Row="2" Column="3">
-            <TextBox Text="0.00" Style="{StaticResource TextBoxStyle}" />
+            <TextBox Text="0.00" />
         </Grid>
 
         <Grid Row="3" Column="3">
-            <TextBox Text="0.1" Style="{StaticResource TextBoxStyle}" />
+            <TextBox Text="0.1" />
         </Grid>
         <Grid Row="4" Column="1">
 
@@ -187,9 +186,7 @@
                 </Grid>
                 <Grid Column="3">
                     <Button
-                        Style="{StaticResource ButtonPersentStyle}"
-
-                        >
+                        Style="{StaticResource ButtonPersentStyle}">
                         100%
                     </Button>
                 </Grid>
@@ -225,20 +222,18 @@
                 </Grid>
                 <Grid Column="3">
                     <Button
-                        Style="{StaticResource ButtonPersentStyle}"
-
-                    >
+                        Style="{StaticResource ButtonPersentStyle}">
                         100%
                     </Button>
                 </Grid>
             </Grid>
 
         </Grid>
-        <Grid Row="5" Column="1">
-            <TextBox Text="21" Margin="5 5 5 5" Background="White" />
+        <Grid Row="5" Column="1" Name="BuyTotal">
+            <TextBox Text="21" Margin="5 5 5 5" Background="White" Name="BuyTotalTxt" />
         </Grid>
-        <Grid Row="5" Column="3">
-            <TextBox Text="21" Margin="5 5 5 5" Background="White" />
+        <Grid Row="5" Column="3" Name="SellTotal">
+            <TextBox Text="21" Margin="5 5 5 5" Background="White" Name="SellTotalTxt" />
         </Grid>
         <Grid Row="6" Column="0" ColumnSpan="2">
             <Button Margin="20 0 20 0" Background="Green">Buy</Button>
@@ -246,7 +241,6 @@
         <Grid Row="6" Column="2" ColumnSpan="2">
             <Button Margin="20 0 20 0" Background="Red">Sell</Button>
         </Grid>
-
 
 
     </Grid>
