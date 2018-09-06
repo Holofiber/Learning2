@@ -1,0 +1,15 @@
+﻿<Window x:Class="WpfBindingElement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfBindingElement"
+        mc:Ignorable="d"
+        >
+    <StackPanel>
+        <Slider Margin="5" Minimum="1" Maximum="72" Value="12" Name="Sld"
+                TickFrequency="35" TickPlacement="BottomRight"></Slider>
+        <TextBlock Margin="5" Text="Какой-то текст" 
+                   FontSize="{Binding ElementName=Sld, Path=Value}"></TextBlock>
+    </StackPanel>
+</Window>
