@@ -18,3 +18,16 @@ If you want to learn more about creating good readme files then refer the follow
 - [ASP.NET Core](https://github.com/aspnet/Home)
 - [Visual Studio Code](https://github.com/Microsoft/vscode)
 - [Chakra Core](https://github.com/Microsoft/ChakraCore)
+
+
+UI-->Server:Bad Order
+Server-->UI:Order error
+
+UI->Server:Market Order
+Server->UI:
+Server->TradingAcc:Validation, fild acc
+TradingAcc->Server:Fills/Part fills
+TradingAcc->MatchingEngine:Acc cheks balance and risks
+MatchingEngine->TradingAcc:Fills/Part fills, update position
+MatchingEngine->Stock:fill order, gemetate primts
+Stock->MatchingEngine:Get OrderBook for a symbol, snapshot
