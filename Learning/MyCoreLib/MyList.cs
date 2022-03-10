@@ -98,7 +98,9 @@ namespace MyCoreLib
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            Array.Copy(arr, index + 1, arr, index, Count - index);
+
+            Count--;
         }
 
         public void Clear()

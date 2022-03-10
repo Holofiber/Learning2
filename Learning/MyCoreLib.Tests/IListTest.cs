@@ -48,12 +48,19 @@ namespace MyCoreLib.Tests
             list.IndexOf(21).Should().Be(-1);
         }
 
-        /* public void RemoveAt(int index)
-         {
-             throw new NotImplementedException();
-         }
+        [Test]
+        public void RemoveAt()
+        {
+            var list = TestData.ListSet1;
 
-         public void Clear()
+            list.IndexOf(11).Should().Be(6);
+
+            list.RemoveAt(6);
+
+            list.IndexOf(11).Should().Be(-1);
+        }
+
+        /* public void Clear()
          {
              throw new NotImplementedException();
          }
