@@ -1,11 +1,10 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace MyCoreLib.Tests
 {
     internal class IListTest
-    {       
+    {
 
         [Test]
         public void IndexOf_Test()
@@ -20,14 +19,14 @@ namespace MyCoreLib.Tests
         [Test]
         public void IndexOf_NoData_Test()
         {
-            var list = TestData.ListSet1;            
+            var list = TestData.ListSet1;
 
             list.IndexOf(99).Should().Be(-1);
         }
 
         [Test]
-         public void Insert_Test()
-         {
+        public void Insert_Test()
+        {
             var list = TestData.ListSet1;
 
             list.IndexOf(7).Should().Be(1);
@@ -35,6 +34,18 @@ namespace MyCoreLib.Tests
             list.Insert(1, 5);
 
             list.IndexOf(5).Should().Be(1);
+        }
+
+        [Test]
+        public void Remove_Test()
+        {
+            var list = TestData.ListSet1;
+
+            list.IndexOf(21).Should().Be(2);
+
+            list.Remove(21);
+
+            list.IndexOf(21).Should().Be(-1);
         }
 
         /* public void RemoveAt(int index)

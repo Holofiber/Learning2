@@ -38,7 +38,10 @@ namespace MyCoreLib
         public void Remove(T i)
         {
             int index = Array.IndexOf(arr, i);
-            //  arr[index] = null;
+
+            Array.Copy(arr, index+1, arr, index, Count - index);
+            
+            Count--;
         }
 
         public void Print()
