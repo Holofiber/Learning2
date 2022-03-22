@@ -2,7 +2,7 @@
 
 namespace MyCoreLib
 {
-    public class MyList<T> : IList<T> where T : IComparable<T>
+    public class MyList<T> : IList<T>,ICollection<T>, IEnumerable<T> where T : IComparable<T>
     {
         T[] arr = new T[8];
 
@@ -17,6 +17,17 @@ namespace MyCoreLib
         public MyList()
         {
             Count = 0;
+        }
+
+        public MyList(IEnumerable<T> collection) : this()
+        {
+            var inputCount = collection.Count();
+
+            if (arr.Length<inputCount)
+            arr = new T[inputCount];
+
+            Array.Copy(collection.ToArray(), arr, inputCount);
+            Count = inputCount;
         }
 
         public void Add(T i)
@@ -78,7 +89,7 @@ namespace MyCoreLib
 
         private void IncreaseArray()
         {
-            Array.Resize(ref arr, arr.Length * 2);
+            Array.Resize(ref arr, arr.Length * 2);             
         }
 
         public int IndexOf(T item)

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MyCoreLib.Tests
 {
-    public class ListTest
+    public partial class ListTest
     {
         [SetUp]
         public void Setup()
@@ -39,14 +39,13 @@ namespace MyCoreLib.Tests
         [Test]
         public void Test2()
         {
-
             var list = new List<string>() { "a", "b" };
+                       
             var linkedList = new LinkedList<string>();
             linkedList.AddLast("a");
-            linkedList.AddLast("b");
+            linkedList.AddLast("b");           
 
             list.Should().BeEquivalentTo(linkedList);
-
         }
 
         [Test]
@@ -168,24 +167,6 @@ namespace MyCoreLib.Tests
             }
 
             list.ArrayLenght.Should().Be(128);
-        }
-
-        class Person
-        {
-            public string Name { get; set; }
-            public int Age { get; set; }
-
-            public Person(int age, string name)
-            {
-                Age = age;
-                Name = name;
-            }
-
-            public override string ToString()
-            {
-                return $"{Name} {Age}";
-            }
-
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace MyCoreLib.Tests
 {
@@ -9,12 +11,55 @@ namespace MyCoreLib.Tests
         [Test]
         public void IndexOf_Test()
         {
-            var list = TestData.ListSet1;
+            IList<int> list = TestData.ListSet1;
 
             list.IndexOf(21).Should().Be(2);
 
             list.IndexOf(99).Should().Be(-1);
         }
+
+
+        [Test]
+        [TestCaseSource(nameof(IList_Ctor_Test_TestCases))]
+        public void IList_Ctor_Test(ICollection<int> list, int expectedCount)
+        {
+            list.Count.Should().Be(expectedCount);
+        }
+
+
+        private static IEnumerable<object[]> IList_Ctor_Test_TestCases()
+        {
+            //List<ICollection<int>> emptyCollections = new List<ICollection<int>> {
+            //   new List<int>(),
+            //   new MyList<int>(),
+            //   new LinkedList<int>()
+            //};
+
+            List<Type> collectionsTypes = new List<Type> {
+               typeof(List<int>),
+               typeof(MyList<int>),
+               typeof(LinkedList<int>)
+            };
+
+            List<int[]> dataSets = new List<int[]>
+            {
+                TestData.ListSorted_Count5_Set,
+                TestData.ListUnsorted_Count8_Set,
+                TestData.ListEmpty_Set,
+                TestData.ListRandoms_Lemon
+            };
+         
+
+            foreach (var data in dataSets)
+                foreach (var type in collectionsTypes)
+                {                   
+                   var collection = Activator.CreateInstance(type, data) as ICollection<int>;
+                    yield return new object[] { collection, data.Length };
+                }
+            
+        }
+
+
 
         [Test]
         public void IndexOf_NoData_Test()
@@ -58,6 +103,12 @@ namespace MyCoreLib.Tests
             list.RemoveAt(6);
 
             list.IndexOf(11).Should().Be(-1);
+        }
+
+        [Test]
+        public void simpletest()
+        {
+
         }
 
         /* public void Clear()
