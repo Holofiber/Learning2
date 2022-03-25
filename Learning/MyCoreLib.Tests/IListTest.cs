@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyCoreLib.Tests
 {
@@ -59,6 +60,87 @@ namespace MyCoreLib.Tests
             
         }
 
+        [Test]
+        public void Linq_MoreThan5_Test()
+        {
+            var list = TestData.ListSet1;
+
+           var morethan5List = list.Where(x => x < 5).ToList();
+        }
+
+        [Test]
+        public void EmptyList_Foreach_Test()
+        {
+            var emptyList = new MyList<int>();
+
+            foreach (var item in emptyList)
+            {
+                Assert.Fail();
+            }            
+        }
+
+        [Test]
+        public void CheckOne_Foreach_Test()
+        {
+            var eList = new MyList<int> { 99};            
+
+            foreach (var item in eList)
+            {
+                item.Should().Be(99);
+            }
+        }
+
+        [Test]
+        public void CheckLast_Foreach_Test()
+        {
+            var fList = new MyList<int> { 99, 77, 55, 44 , 8, 88};          
+
+            fList.Last().Should().Be(88);
+            fList.ToList().Count().Should().Be(6);
+
+            int counter = 0;
+
+            foreach (var item in fList)
+            {                
+                counter++;
+
+                if (counter == fList.Count)
+                {
+                    item.Should().Be(88);
+                }
+            }
+        }
+
+        [Test]
+        public void Enumerator_Test()
+        {
+            var list = TestData.ListSet1;
+
+            var enumer =  list.GetEnumerator();
+            
+            enumer.MoveNext();
+            enumer.Current.Should().Be(1);
+            enumer.MoveNext();
+            enumer.Current.Should().Be(7);
+            enumer.MoveNext();
+            enumer.Current.Should().Be(21);
+            enumer.MoveNext();
+
+            int i = enumer.Current;
+
+            
+        }
+
+        [Test]
+        public void Reverse_Test()
+        {
+            var list = TestData.ListSet1;
+
+            foreach (var item in list.GetReverse())
+            {
+                Console.WriteLine(item);
+            }
+        }
 
 
         [Test]

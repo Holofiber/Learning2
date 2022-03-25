@@ -2,7 +2,7 @@
 
 namespace MyCoreLib
 {
-    public class MyList<T> : IList<T>,ICollection<T>, IEnumerable<T> where T : IComparable<T>
+    public class MyList<T> : IList<T>, ICollection<T>, IEnumerable<T> where T : IComparable<T>
     {
         T[] arr = new T[8];
 
@@ -12,7 +12,7 @@ namespace MyCoreLib
 
         public int ArrayLenght => arr.Length;
 
-        public T this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public T this[int index] { get => arr[index]; set => arr[index] = value; }
 
         public MyList()
         {
@@ -23,8 +23,8 @@ namespace MyCoreLib
         {
             var inputCount = collection.Count();
 
-            if (arr.Length<inputCount)
-            arr = new T[inputCount];
+            if (arr.Length < inputCount)
+                arr = new T[inputCount];
 
             Array.Copy(collection.ToArray(), arr, inputCount);
             Count = inputCount;
@@ -50,8 +50,8 @@ namespace MyCoreLib
         {
             int index = Array.IndexOf(arr, i);
 
-            Array.Copy(arr, index+1, arr, index, Count - index);
-            
+            Array.Copy(arr, index + 1, arr, index, Count - index);
+
             Count--;
         }
 
@@ -89,7 +89,7 @@ namespace MyCoreLib
 
         private void IncreaseArray()
         {
-            Array.Resize(ref arr, arr.Length * 2);             
+            Array.Resize(ref arr, arr.Length * 2);
         }
 
         public int IndexOf(T item)
@@ -126,7 +126,7 @@ namespace MyCoreLib
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            Array.Copy(array.ToArray(), arr, arrayIndex);
         }
 
         bool ICollection<T>.Remove(T item)
@@ -136,12 +136,62 @@ namespace MyCoreLib
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (var i = 0; i < Count; i++)
+            {
+                yield return arr[i];
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
+        }
+
+        public IEnumerable<T> GetReverse()
+        {
+            for (int i = Count-1; i >= 0; i--)
+            {
+                yield return arr[i];
+            }
+        }
+
+        public struct Enumerator : IEnumerator<T>, IEnumerator
+        {
+            private MyList<T> myList;
+            private int index;
+            private T curent;
+
+            public Enumerator(MyList<T> myList)
+            {
+                this.myList = myList;
+                index = 0;
+                curent = default(T);
+            }
+
+            public T Current => curent;
+
+            object IEnumerator.Current => curent;
+
+            public void Dispose()
+            {
+            }
+
+            public bool MoveNext()
+            {
+                if (index >= myList.Count || myList.Count == 0)
+                    return false;
+
+                curent = myList[index];
+                index++;
+
+                return true;
+            }
+
+            public void Reset()
+            {
+                index = 0;
+                curent = default(T);
+            }
         }
     }
 }
