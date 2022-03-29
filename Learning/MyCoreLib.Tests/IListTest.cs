@@ -25,8 +25,7 @@ namespace MyCoreLib.Tests
         public void IList_Ctor_Test(ICollection<int> list, int expectedCount)
         {
             list.Count.Should().Be(expectedCount);
-        }
-
+        }       
 
         private static IEnumerable<object[]> IList_Ctor_Test_TestCases()
         {
@@ -39,7 +38,8 @@ namespace MyCoreLib.Tests
             List<Type> collectionsTypes = new List<Type> {
                typeof(List<int>),
                typeof(MyList<int>),
-               typeof(LinkedList<int>)
+               typeof(LinkedList<int>),
+               typeof(DLinkedList<int>),
             };
 
             List<int[]> dataSets = new List<int[]>
@@ -59,6 +59,37 @@ namespace MyCoreLib.Tests
                 }
             
         }
+
+        private static IEnumerable<object> IList_1to5_Test_TestCases()
+        {
+            //List<ICollection<int>> emptyCollections = new List<ICollection<int>> {
+            //   new List<int>(),
+            //   new MyList<int>(),
+            //   new LinkedList<int>()
+            //};
+
+            List<Type> collectionsTypes = new List<Type> {
+               typeof(List<int>),
+               typeof(MyList<int>),               
+               typeof(DLinkedList<int>),
+            };
+
+            List<int[]> dataSets = new List<int[]>
+            {
+                TestData.ListSorted_Count5_Set,                
+            };
+
+
+            foreach (var data in dataSets)
+                foreach (var type in collectionsTypes)
+                {
+                    var collection = Activator.CreateInstance(type, data) as ICollection<int>;
+                    yield return collection;
+                }
+
+        }
+
+
 
         [Test]
         public void Linq_MoreThan5_Test()
@@ -131,7 +162,7 @@ namespace MyCoreLib.Tests
             
         }
 
-        [Test]
+        [Test]        
         public void Reverse_Test()
         {
             var list = TestData.ListSet1;
@@ -144,19 +175,19 @@ namespace MyCoreLib.Tests
 
 
         [Test]
-        public void IndexOf_NoData_Test()
+        [TestCaseSource(nameof(IList_1to5_Test_TestCases))]
+        public void IndexOf_NoData_Test(IList<int> list)
         {
-            var list = TestData.ListSet1;
+            list = TestData.ListSet1;            
 
             list.IndexOf(99).Should().Be(-1);
         }
 
         [Test]
-        public void Insert_Test()
+        [TestCaseSource(nameof(IList_1to5_Test_TestCases))]
+        public void Insert_Test(IList<int> list)
         {
-            var list = TestData.ListSet1;
-
-            list.IndexOf(7).Should().Be(1);
+            list.IndexOf(3).Should().Be(2);
 
             list.Insert(1, 5);
 
@@ -164,15 +195,15 @@ namespace MyCoreLib.Tests
         }
 
         [Test]
-        public void Remove_Test()
-        {
-            var list = TestData.ListSet1;
+        [TestCaseSource(nameof(IList_1to5_Test_TestCases))]
+        public void Remove_Test(IList<int> list)
+        {           
 
-            list.IndexOf(21).Should().Be(2);
+            list.IndexOf(3).Should().Be(2);
 
-            list.Remove(21);
+            list.Remove(3);
 
-            list.IndexOf(21).Should().Be(-1);
+            list.IndexOf(3).Should().Be(-1);
         }
 
         [Test]
@@ -190,7 +221,78 @@ namespace MyCoreLib.Tests
         [Test]
         public void simpletest()
         {
+            var dlist = new DLinkedList<int>();
+            dlist.Add(1);
+            dlist.Add(-1);
+            dlist.Add(2);
+            
+            int counter = 0;
 
+            foreach (var item in dlist.Reverse())
+            {
+                counter++;
+                Console.WriteLine($"foreach {item}");
+            }
+
+            counter.Should().Be(dlist.Count);            
+        }
+        
+        [Test]
+        public void Remove_DList_Test()
+        {
+            var dlist = new DLinkedList<int>();
+            dlist.Add(4);
+            dlist.Add(1);
+            dlist.Add(-1);
+            dlist.Add(2);            ;
+
+            dlist.Remove(1);
+
+            dlist.Count().Should().Be(3);
+
+            foreach (var item in dlist)
+            {                
+                Console.WriteLine(item);
+            }
+        }
+
+        [Test]
+        public void IndexOf_DList_Test()
+        {
+            var dlist = new DLinkedList<int>();           
+
+            dlist.Add(4);
+            dlist.Add(1);
+            dlist.Add(-1);
+            dlist.Add(2);            
+
+            dlist.IndexOf(-1).Should().Be(2);
+        }
+
+        [Test]
+        public void CopyTo_DList_Test()
+        {
+            int[] arr = new int[20] ;
+
+            var list = new DLinkedList<int>() { 7, 8, 9, 10};
+
+            list.CopyTo(arr, 5);
+            
+            arr[5].Should().Be(7);
+        }
+
+        [Test]
+        public void Contains_DList_Test()
+        {
+            var list = new DLinkedList<int> { 1, 2, 3, };
+
+            list.Contains(2).Should().Be(true);
+        }
+
+        [Test]
+        public void t()
+        {
+            
         }
 
         /* public void Clear()

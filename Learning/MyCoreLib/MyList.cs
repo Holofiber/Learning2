@@ -46,13 +46,19 @@ namespace MyCoreLib
             Count++;
         }
 
-        public void Remove(T i)
+        public bool Remove(T i)
         {
             int index = Array.IndexOf(arr, i);
+            if (index>=0)
+            {
+                Array.Copy(arr, index + 1, arr, index, Count - index);
 
-            Array.Copy(arr, index + 1, arr, index, Count - index);
+                Count--;
 
-            Count--;
+                return true;
+            }
+
+            return false;
         }
 
         public void Print()
@@ -127,12 +133,7 @@ namespace MyCoreLib
         public void CopyTo(T[] array, int arrayIndex)
         {
             Array.Copy(array.ToArray(), arr, arrayIndex);
-        }
-
-        bool ICollection<T>.Remove(T item)
-        {
-            throw new NotImplementedException();
-        }
+        }       
 
         public IEnumerator<T> GetEnumerator()
         {
