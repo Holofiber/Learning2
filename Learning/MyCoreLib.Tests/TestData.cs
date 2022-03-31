@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bogus;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MyCoreLib.Tests
@@ -31,6 +33,16 @@ namespace MyCoreLib.Tests
         public static int[] ListEmpty_Set => new int[] {};
 
         public static int[] ListRandoms_Lemon => GetRandom(1_000_000);
+
+        public static IEnumerable<Trader> GetTraders(int count)
+        {
+            var testTradersFaker = new Faker<Trader>()
+                .RuleFor(n => n.Name, f => f.Name.FullName())
+                .RuleFor(b => b.Balance, f => f.Random.Double(10, 1000))
+                .RuleFor(c => c.Country, f => f.Address.Country());
+
+             return testTradersFaker.Generate(count);                          
+        }
 
         private static int[] GetRandom(int count)
         {

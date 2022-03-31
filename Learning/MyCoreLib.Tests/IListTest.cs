@@ -23,7 +23,8 @@ namespace MyCoreLib.Tests
         [Test]
         [TestCaseSource(nameof(IList_Ctor_Test_TestCases))]
         public void IList_Ctor_Test(ICollection<int> list, int expectedCount)
-        {
+        {           
+
             list.Count.Should().Be(expectedCount);
         }       
 
@@ -207,15 +208,14 @@ namespace MyCoreLib.Tests
         }
 
         [Test]
-        public void RemoveAt()
-        {
-            var list = TestData.ListSet1;
+        [TestCaseSource(nameof(IList_1to5_Test_TestCases))]
+        public void RemoveAt(IList<int> list)
+        {           
+            list.IndexOf(3).Should().Be(2);
 
-            list.IndexOf(11).Should().Be(6);
+            list.RemoveAt(2);
 
-            list.RemoveAt(6);
-
-            list.IndexOf(11).Should().Be(-1);
+            list.IndexOf(3).Should().Be(-1);
         }
 
         [Test]
@@ -225,7 +225,8 @@ namespace MyCoreLib.Tests
             dlist.Add(1);
             dlist.Add(-1);
             dlist.Add(2);
-            
+            dlist.Where(x => x > 0).Where(x => x < 10);
+
             int counter = 0;
 
             foreach (var item in dlist.Reverse())
@@ -292,7 +293,11 @@ namespace MyCoreLib.Tests
         [Test]
         public void t()
         {
-            
+            var list = TestData.GetTraders(100);
+
+            list.PrettyPrint();
+
+            //Utill.PrettyPrint(list);            
         }
 
         /* public void Clear()
