@@ -8,53 +8,56 @@ namespace SandBoxConsole
         static private readonly object theLock = new Object();
         static private int numberThreads = 0;
         static private Random rnd = new Random();
+        static private int counter = 0;
 
-        private static void RndThreadFunc()
+        private static void ThreadFunc1()
         {
-            lock(theLock)
+            lock (theLock)
             {
-                ++numberThreads;
-            }            
-
-            int time = rnd.Next(1000, 12000);
-            Thread.Sleep(time);
-
-            lock(theLock)
-            {
-                --numberThreads;
-            }            
+                for (int i = 0; i < 50; i++)
+                {
+                    Monitor.Wait(theLock, Timeout.Infinite);
+                    Console.WriteLine($"{++counter} from thread {Thread.CurrentThread.ManagedThreadId}");
+                    Monitor.Pulse(theLock);
+                }
+            }
         }
 
-        private static void RptThreadFunc()
+        private static void ThreadFunc2()
         {
-            while (true)
+            lock (theLock)
             {
-                int threadCount = 0;
-
-                lock(theLock)
+                for (int i = 0; i < 50; i++)
                 {
-                    threadCount = numberThreads;
+                    Monitor.Pulse(theLock);
+                    Monitor.Wait(theLock, Timeout.Infinite);
+                    Console.WriteLine($"{++counter} from thread {Thread.CurrentThread.ManagedThreadId}");
                 }
+            }
+        }
 
-                Console.WriteLine($"{threadCount} active treads");
-
-                Thread.Sleep(1000);
+        private static void ThreadFunc3()
+        {
+            lock (theLock)
+            {
+                for (int i = 0; i < 50; i++)
+                {
+                    Monitor.Pulse(theLock);
+                    Monitor.Wait(theLock, Timeout.Infinite);
+                    Console.WriteLine($"{++counter} from thread {Thread.CurrentThread.ManagedThreadId}");
+                }
             }
         }
 
         static void Main(string[] args)
         {
-            Thread reporter = new Thread(new ThreadStart(RptThreadFunc));
+            Thread thread1 = new Thread(new ThreadStart(ThreadFunc1));
+            Thread thread2 = new Thread(new ThreadStart(ThreadFunc2));
+            Thread thread3 = new Thread(new ThreadStart(ThreadFunc3));
 
-            reporter.IsBackground = true;
-            reporter.Start();
-
-            Thread[] rndthread = new Thread[50];
-            for (uint i =0; i < 50; ++i)
-            {
-                rndthread[i] = new Thread(new ThreadStart(RndThreadFunc));
-                rndthread[i].Start();
-            }
+            thread1.Start();
+            thread2.Start();
+            thread3.Start();
         }
 
     }
