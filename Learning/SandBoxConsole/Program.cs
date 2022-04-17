@@ -1,64 +1,43 @@
 ﻿using System;
-using System.Threading;
+using System.Collections.Concurrent;
+using System.Numerics;
+using System.Threading.Tasks;
 
 namespace SandBoxConsole
 {
     public class Program
     {
-        static private readonly object theLock = new Object();
-        static private int numberThreads = 0;
-        static private Random rnd = new Random();
-        static private int counter = 0;
-
-        private static void ThreadFunc1()
-        {
-            lock (theLock)
-            {
-                for (int i = 0; i < 50; i++)
-                {
-                    Monitor.Wait(theLock, Timeout.Infinite);
-                    Console.WriteLine($"{++counter} from thread {Thread.CurrentThread.ManagedThreadId}");
-                    Monitor.Pulse(theLock);
-                }
-            }
-        }
-
-        private static void ThreadFunc2()
-        {
-            lock (theLock)
-            {
-                for (int i = 0; i < 50; i++)
-                {
-                    Monitor.Pulse(theLock);
-                    Monitor.Wait(theLock, Timeout.Infinite);
-                    Console.WriteLine($"{++counter} from thread {Thread.CurrentThread.ManagedThreadId}");
-                }
-            }
-        }
-
-        private static void ThreadFunc3()
-        {
-            lock (theLock)
-            {
-                for (int i = 0; i < 50; i++)
-                {
-                    Monitor.Pulse(theLock);
-                    Monitor.Wait(theLock, Timeout.Infinite);
-                    Console.WriteLine($"{++counter} from thread {Thread.CurrentThread.ManagedThreadId}");
-                }
-            }
-        }
+        const int FactorialToCompute = 4000;
 
         static void Main(string[] args)
         {
-            Thread thread1 = new Thread(new ThreadStart(ThreadFunc1));
-            Thread thread2 = new Thread(new ThreadStart(ThreadFunc2));
-            Thread thread3 = new Thread(new ThreadStart(ThreadFunc3));
+            var numbers = new ConcurrentDictionary<BigInteger, BigInteger>(4, FactorialToCompute);
 
-            thread1.Start();
-            thread2.Start();
-            thread3.Start();
+            //Func<BigInteger, BigInteger> factorial = null;
+            //factorial = (n) => (n == 0) ? 1 : n * factorial(n - 1); 
+
+            BigInteger factorial(BigInteger n)
+            {
+                return (n == 0) ? 1 : n * factorial(n - 1);
+            }
+
+            var po = new ParallelOptions();
+
+            po.MaxDegreeOfParallelism = Environment.ProcessorCount;
+
+            //set GC to server mode for better performens.
+            Parallel.For(0, FactorialToCompute, po, (i) =>
+            {
+                numbers[i] = factorial(i);
+            });
+
+            Console.WriteLine("DONE");
+
+            //for (ulong i = 0; i < FactorialToCompute; ++i)
+            //{
+            //    numbers[i] = factorial(i);
+            //}
+
         }
-
     }
 }
