@@ -11,25 +11,18 @@ namespace SandBoxConsole
 
         private static void RndThreadFunc()
         {
-            Monitor.Enter(theLock);
-            try
+            lock(theLock)
             {
                 ++numberThreads;
-            }
-            finally
-            {
-                Monitor.Exit(theLock);
-            }
+            }            
 
             int time = rnd.Next(1000, 12000);
             Thread.Sleep(time);
 
-            Monitor.Enter(theLock);
-            try
+            lock(theLock)
             {
                 --numberThreads;
-            }
-            finally { Monitor.Exit(theLock); }
+            }            
         }
 
         private static void RptThreadFunc()
@@ -37,16 +30,12 @@ namespace SandBoxConsole
             while (true)
             {
                 int threadCount = 0;
-                Monitor.Enter(theLock);
 
-                try
+                lock(theLock)
                 {
                     threadCount = numberThreads;
                 }
-                finally
-                {
-                    Monitor.Exit(theLock);
-                }
+
                 Console.WriteLine($"{threadCount} active treads");
 
                 Thread.Sleep(1000);
@@ -66,7 +55,6 @@ namespace SandBoxConsole
                 rndthread[i] = new Thread(new ThreadStart(RndThreadFunc));
                 rndthread[i].Start();
             }
-
         }
 
     }
