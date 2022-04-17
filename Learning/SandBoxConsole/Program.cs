@@ -1,76 +1,73 @@
 ﻿using System;
 using System.Threading;
-using System.Collections;
 
 namespace SandBoxConsole
 {
     public class Program
     {
+        static private readonly object theLock = new Object();
+        static private int numberThreads = 0;
+        static private Random rnd = new Random();
+
+        private static void RndThreadFunc()
+        {
+            Monitor.Enter(theLock);
+            try
+            {
+                ++numberThreads;
+            }
+            finally
+            {
+                Monitor.Exit(theLock);
+            }
+
+            int time = rnd.Next(1000, 12000);
+            Thread.Sleep(time);
+
+            Monitor.Enter(theLock);
+            try
+            {
+                --numberThreads;
+            }
+            finally { Monitor.Exit(theLock); }
+        }
+
+        private static void RptThreadFunc()
+        {
+            while (true)
+            {
+                int threadCount = 0;
+                Monitor.Enter(theLock);
+
+                try
+                {
+                    threadCount = numberThreads;
+                }
+                finally
+                {
+                    Monitor.Exit(theLock);
+                }
+                Console.WriteLine($"{threadCount} active treads");
+
+                Thread.Sleep(1000);
+            }
+        }
+
         static void Main(string[] args)
         {
-            Queue queue1 = new Queue();
-            SetQueue(queue1, 100, "queue1");
+            Thread reporter = new Thread(new ThreadStart(RptThreadFunc));
 
-            Queue queue2 = new Queue();
-            SetQueue(queue2, 100, "queue2");
+            reporter.IsBackground = true;
+            reporter.Start();
 
-            QueeueProcessor proc1 = new QueeueProcessor(queue1);
-            proc1.BeginProcessData();
-
-            QueeueProcessor proc2 = new QueeueProcessor(queue2);
-            proc2.BeginProcessData();
-
-            Thread.SpinWait(2000000);
-
-            proc1.EndProcessData();
-            proc2.EndProcessData();
-
-            Console.WriteLine("Hello World!");
-            Console.ReadLine();
-        }
-
-        private static void SetQueue(Queue queue, int count, string Qname)
-        {
-            
-            for (int i = 0; i < count; i++)
+            Thread[] rndthread = new Thread[50];
+            for (uint i =0; i < 50; ++i)
             {
-                queue.Enqueue($"{Qname} {i}");
+                rndthread[i] = new Thread(new ThreadStart(RndThreadFunc));
+                rndthread[i].Start();
             }
+
         }
+
     }
-
-    
-
-    public class QueeueProcessor
-    {
-        private readonly Queue theQueue;
-        private Thread theThread;
-        public Thread TheThread { get { return theThread; } }
-
-        public QueeueProcessor(Queue theQueue)
-        {
-            this.theQueue = theQueue;
-            theThread = new Thread(new ThreadStart(this.ThreadFunc));
-        }
-
-        public void BeginProcessData()
-        {
-            theThread.Start();
-        }
-
-        public void EndProcessData()
-        {
-            theThread.Join();
-        }
-
-        private void ThreadFunc()
-        {
-            foreach (var item in theQueue)
-            {
-                Console.WriteLine(item);
-            }
-            
-        }
-    }
-
 }
